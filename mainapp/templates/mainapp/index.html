@@ -1,30 +1,103 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <title>АРТ-Лазер</title>
-    <link rel="stylesheet" type="text/css" href="/static/css/normalize.css">
-    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
-    <link rel="stylesheet" href="/static/fonts/font-awesome/css/font-awesome.css">
-</head>
-<body>
-    <div class="container clr">
-        <div class="slider trending">
-            <header>
-                <a class="logo" href="/"><img src="/static/img/my_store_logo.png" alt="logo"></a>
-                <a class="search" href="#"><img src="/static/img/search.png" alt=""></a>
-                <input class="search_input" type="search" placeholder="Поиск">
-                <ul class="menu">
-                   <li><a class="click" href="/">ДОМОЙ</a></li>
-                   <li><a href="/products/">КАТАЛОГ</a></li>
-                   <li><a href="/contact/">КОНТАКТЫ</a></li>
-                </ul>
-            </header>
+{% extends 'mainapp/base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+    {{ block.super }} - {{ title }}
+{% endblock%}
+
+{% block container %}
+    <div class="slider trending">
+        {% include 'mainapp/includes/inc__main_menu.html' %}
+        <div class="block_text">
+            <h3><span style="color: #43a047;">ТЕНДЕНЦИИ</span></h3>
+            <h2>Конструкторы</h2>
+            <p>Уникальные товары оптом и на заказ</p>
+            <a class="button_order" href="#">Заказать<img src="{% static '/img/arrow.png' %}" alt=""></a>
+        </div>
+        <nav>
+            <a class="circle" href="#"></a>
+            <a class="circle circle_active" href="#"></a>
+            <a class="circle" href="#"></a>
+        </nav>
+    </div>
+    <div class="content clearfix">
+        <div class="product_header">
+            <ul class="menu_content">
+                <li><a class="click" href="#">Популярные</a></li>
+                <li><a href="#">Новинки</a></li>
+            </ul>
+            <a class="explore" href="#">показать все<img src="{% static '/img/arrow.png' %}" alt=""></a>
+        </div>
+        <div class="preview">
+            <a class="block_pic" href="#"><img src="{% static '/img/product_truck.jpg' %}" alt="prod">
+                <div class="txt">
+                    <div class="b_c"><img src="{% static '/img/arrow.png' %}" alt="arrow"></div>
+                    <h3>Конструктор</h3>
+                    <p>Seat and back with upholstery made of cold cure foam. Steel frame, available in matt powder-coated
+                        black or highly polished chrome.</p>
+                </div>
+            </a>
+            <a class="block_pic" href="#"><img src="{% static '/img/product_owl.jpg' %}" alt="prod">
+                <div class="txt">
+                    <div class="b_c"><img src="{% static '/img/arrow.png' %}" alt="arrow"></div>
+                    <h3>Светильник</h3>
+                    <p>Seat and back with upholstery made of cold cure foam. Steel frame, available in matt powder-coated
+                        black or highly polished chrome.</p>
+                </div>
+            </a>
+            <a class="block_pic" href="#"><img src="{% static '/img/product_plane.jpg' %}" alt="prod">
+                <div class="txt">
+                    <div class="b_c"><img src="{% static '/img/arrow.png' %}" alt="arrow"></div>
+                    <h3>Конструктор</h3>
+                    <p>Seat and back with upholstery made of cold cure foam. Steel frame, available in matt powder-coated
+                        black or highly polished chrome.</p>
+                </div>
+            </a>
+            <a class="block_pic" href="#"><img src="{% static '/img/product_house.jpg' %}" alt="prod">
+                <div class="txt">
+                    <div class="b_c"><img src="{% static '/img/arrow.png' %}" alt="arrow"></div>
+                    <h3>Светильник</h3>
+                    <p>Seat and back with upholstery made of cold cure foam. Steel frame, available in matt powder-coated
+                        black or highly polished chrome.</p>
+                </div>
+            </a>
+        </div>
+        <div class="exclusive">
+            <div class="exclusive_left">
+                <div class="block_text_exclusive">
+                    <h3>эксклюзив</h3>
+                    <h2>Коробка</h2>
+                    <p>Коллекционная коробка. Тонировка и гравировка.</p>
+                    <a class="button_order" href="#">Заказать<img src="{% static '/img/arrow.png' %}" alt=""></a>
+                </div>
+            </div>
+            <div class="exclusive_right">
+                <div class="block_text_exclusive">
+                    <h3>эксклюзив</h3>
+                    <h2>Светильник</h2>
+                    <p>Уникальная форма. Новинка на рынке.</p>
+                    <a class="button_order" href="#">Заказать<img src="{% static '/img/arrow.png' %}" alt=""></a>
+                </div>
+            </div>
+        </div>
+        <div class="product_header">
+            <h2>Популярные товары</h2>
+            <a class="explore" href="#">показать все<img src="{% static '/img/arrow.png' %}" alt=""></a>
+        </div>
+        <div class="pic">
+            <a href="#"><img src="{% static '/img/product_truck.jpg' %}" alt=""></a>
+            <a href="product_detail.html"><img src="{% static '/img/product_heli.jpg' %}" alt=""></a>
+            <a href="#"><img src="{% static '/img/product_owl.jpg' %}" alt=""></a>
+            <a href="#"><img src="{% static '/img/product_light.jpg' %}" alt=""></a>
+            <a href="#"><img src="{% static '/img/product_house.jpg' %}" alt=""></a>
+            <a href="#"><img src="{% static '/img/product_plane.jpg' %}" alt=""></a>
+        </div>
+        <div class="slider hot_deal">
             <div class="block_text">
-                <h3><span style="color: #43a047;">ТЕНДЕНЦИИ</span></h3>
-                <h2>Конструкторы</h2>
-                <p>Уникальные товары оптом и на заказ</p>
-                <a class="button_order" href="#">Заказать<img src="/static/img/arrow.png" alt=""></a>
+                <h3>ГОРЯЧЕЕ ПРЕДЛОЖЕНИЕ</h3>
+                <h2>Ночники</h2>
+                <p>Экологически чистые материалы. С регулирвкой освещенности.</p>
+                <a class="button_order" href="#">Заказать<img src="{% static '/img/arrow.png' %}" alt=""></a>
             </div>
             <nav>
                 <a class="circle" href="#"></a>
@@ -32,158 +105,32 @@
                 <a class="circle" href="#"></a>
             </nav>
         </div>
-        <div class="content clearfix">
-           <div class="product_header">
-            <ul class="menu_content">
-                <li><a class="click" href="#">Популярные</a></li>
-                <li><a href="#">Новинки</a></li>
-            </ul>
-            <a class="explore" href="#">показать все<img src="/static/img/arrow.png" alt=""></a>
-            </div>
-            <div class="preview">
-                <a class="block_pic" href="#"><img src="/static/img/product_truck.jpg" alt="prod">
-                    <div class="txt">
-                        <div class="b_c"><img src="/static/img/arrow.png" alt="arrow"></div>
-                        <h3>Конструктор</h3>
-                        <p>Seat and back with upholstery made of cold cure foam. Steel frame, available in matt powder-coated black or highly polished chrome.</p>
-                    </div>
-                </a>
-                <a class="block_pic" href="#"><img src="/static/img/product_owl.jpg" alt="prod">
-                    <div class="txt">
-                        <div class="b_c"><img src="/static/img/arrow.png" alt="arrow"></div>
-                        <h3>Светильник</h3>
-                        <p>Seat and back with upholstery made of cold cure foam. Steel frame, available in matt powder-coated black or highly polished chrome.</p>
-                    </div>
-                </a>
-                <a class="block_pic" href="#"><img src="/static/img/product_plane.jpg" alt="prod">
-                    <div class="txt">
-                        <div class="b_c"><img src="/static/img/arrow.png" alt="arrow"></div>
-                        <h3>Конструктор</h3>
-                        <p>Seat and back with upholstery made of cold cure foam. Steel frame, available in matt powder-coated black or highly polished chrome.</p>
-                    </div>
-                </a>
-                <a class="block_pic" href="#"><img src="/static/img/product_house.jpg" alt="prod">
-                    <div class="txt">
-                        <div class="b_c"><img src="/static/img/arrow.png" alt="arrow"></div>
-                        <h3>Светильник</h3>
-                        <p>Seat and back with upholstery made of cold cure foam. Steel frame, available in matt powder-coated black or highly polished chrome.</p>
-                    </div>                
-                </a>
-            </div>
-            <div class="exclusive">
-                <div class="exclusive_left">
-                    <div class="block_text_exclusive">
-                        <h3>эксклюзив</h3>
-                        <h2>Коробка</h2>
-                        <p>Коллекционная коробка. Тонировка и гравировка.</p>
-                        <a class="button_order" href="#">Заказать<img src="/static/img/arrow.png" alt=""></a>
-                    </div>
-                </div>
-                <div class="exclusive_right">
-                    <div class="block_text_exclusive">
-                        <h3>эксклюзив</h3>
-                        <h2>Светильник</h2>
-                        <p>Уникальная форма. Новинка на рынке.</p>
-                        <a class="button_order" href="#">Заказать<img src="/static/img/arrow.png" alt=""></a>
-                    </div>
+        <div class="exclusive_product clearfix">
+            <div class="img_left">
+                <div class="block_text_exclusive pr_c">
+                    <h3>эксклюзив</h3>
+                    <h2>Светильник</h2>
+                    <p>Уникальная форма. Новинка на рынке.</p>
+                    <a class="button_order" href="#">Заказать<img src="{% static '/img/arrow.png' %}" alt=""></a>
                 </div>
             </div>
-            <div class="product_header">
-                <h2>Популярные товары</h2>
-                <a class="explore" href="#">показать все<img src="/static/img/arrow.png" alt=""></a>
-            </div>
-            <div class="pic">
-                <a href="#"><img src="/static/img/product_truck.jpg" alt=""></a>
-                <a href="product_detail.html"><img src="/static/img/product_heli.jpg" alt=""></a>
-                <a href="#"><img src="/static/img/product_owl.jpg" alt=""></a>
-                <a href="#"><img src="/static/img/product_light.jpg" alt=""></a>
-                <a href="#"><img src="/static/img/product_house.jpg" alt=""></a>
-                <a href="#"><img src="/static/img/product_plane.jpg" alt=""></a>
-            </div>            
-            <div class="slider hot_deal">
-                <div class="block_text">
-                    <h3>ГОРЯЧЕЕ ПРЕДЛОЖЕНИЕ</h3>
-                    <h2>Ночники</h2>
-                    <p>Экологически чистые материалы. С регулирвкой освещенности.</p>
-                    <a class="button_order" href="#">Заказать<img src="/static/img/arrow.png" alt=""></a>
-                </div>
-                <nav>
-                    <a class="circle" href="#"></a>
-                    <a class="circle circle_active" href="#"></a>
-                    <a class="circle" href="#"></a>
-                </nav>
-            </div>
-            <div class="exclusive_product clearfix">
-               <div class="img_left">
-                    <div class="block_text_exclusive pr_c">
-                            <h3>эксклюзив</h3>
-                            <h2>Светильник</h2>
-                            <p>Уникальная форма. Новинка на рынке.</p>
-                            <a class="button_order" href="#">Заказать<img src="/static/img/arrow.png" alt=""></a>
-                    </div>
-                </div>
-                <div class="products">
-                        <a href=""><img src="/static/img/product_heli.jpg" alt=""></a>
-                        <div></div>
-                        <a href=""><img src="/static/img/product_house.jpg" alt=""></a>
-                        <a href=""><img src="/static/img/product_owl.jpg" alt=""></a>
-                        <div></div>
-                        <a href=""><img src="/static/img/product_truck.jpg" alt=""></a>
-                </div>
-            </div>
-            <!-- <div class="back">
-                <div class="back_text">
-                    <h3>mobile app</h3>
-                    <h2>find. follow. favorite.</h2>
-                    <p>Save your favorites and share your style.</p>
-                    <a href=""><img src="/static/img/app-store.jpg" alt=""></a>
-                    <a href=""><img src="/static/img/google-play.jpg" alt=""></a>
-                </div>
-            </div>-->
-        </div> <!-- ====== CONTENT END ====== -->
-    </div> <!-- ====== CONTAINER END ====== -->
-    <footer>
-        <div class="info">
-            <div class="contact_us">
-                <a href="contact.html"><h4>Наши контакты</h4></a>
-                <p>г. Луцк, Волынская обл., Украина</p>
-                <p>+380 (96) 890-77-11 <br/>
-                <a href="mailto:office&@art-laser.com.ua">office&#64;art-laser.com.ua</a></p>
-            </div>
-            <div class="useful">
-                <h4>Полезная информация</h4>
-                <div>
-                    <a href="">Условия продажи</a>
-                    <a href="">Оплата</a>
-                    <a href="">Доставка</a>
-                </div>
-                <div>
-                    <a href="">История продаж</a>
-                    <a href="">Карьера</a>
-                    <a href="">Обмены &amp; возвраты</a>
-                </div>
-            </div>
-            <div class="subscribe">
-                <h4>Оставайтесь на связи!</h4>
-                <p>Подпишитесь, чтобы узнать о наших последних новостях, продуктах и специальных предложениях только для подписчиков</p>
-                <form class="email" action="" method="post">
-                    <input type="email" placeholder="укажите ваш email">
-                    <div class="but">
-                        <img src="/static/img/send.png" alt="">
-                    </div>
-                </form>
+            <div class="products">
+                <a href=""><img src="{% static '/img/product_heli.jpg' %}" alt=""></a>
+                <div></div>
+                <a href=""><img src="{% static '/img/product_house.jpg' %}" alt=""></a>
+                <a href=""><img src="{% static '/img/product_owl.jpg' %}" alt=""></a>
+                <div></div>
+                <a href=""><img src="{% static '/img/product_truck.jpg' %}" alt=""></a>
             </div>
         </div>
-        <div class="copyright">
-            <p>&copy; ART-Laser 2018. Все права защищены</p>
-            <div class="icon_soc">
-                <a href="https://www.facebook.com/" target="_blank"><img src="/static/img/facebook.png" alt=""></a>
-                <a href="https://twitter.com/" target="_blank"><img src="/static/img/twitter.png" alt=""></a>
-                <a href="https://plus.google.com/" target="_blank"><img src="/static/img/google.png" alt=""></a>
-                <a href="https://www.pinterest.com/" target="_blank"><img src="/static/img/pinterest.png" alt=""></a>
+        <!-- <div class="back">
+            <div class="back_text">
+                <h3>mobile app</h3>
+                <h2>find. follow. favorite.</h2>
+                <p>Save your favorites and share your style.</p>
+                <a href=""><img src="{% static '/img/app-store.jpg" alt=""></a>
+                <a href=""><img src="{% static '/img/google-play.jpg" alt=""></a>
             </div>
-            <p>Положения &amp; Условия / Конфиденциальность &amp; Cookies</p>
-        </div>
-    </footer> <!-- ====== FOTER END ====== -->
-</body>
-</html>
+        </div>-->
+    </div> <!-- ====== CONTENT END ====== -->
+{% endblock %}

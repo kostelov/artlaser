@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>
+    {% block title %}
+        АРТ-Лазер
+    {% endblock %}
+    </title>
+    {% block css %}
+        <link rel="stylesheet" type="text/css" href="{% static '/css/normalize.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static '/css/style.css' %}">
+        <link rel="stylesheet" href="{% static '/fonts/font-awesome/css/font-awesome.css' %}">
+    {% endblock %}
+    {% block js %}
+    {% endblock %}
+</head>
+<body>
+    <div class="container clr">
+        {% block container %}
+        {% endblock %}
+    </div> <!-- ====== CONTAINER END ====== -->
+    {% block footer %}
+        <footer>
+        <div class="info">
+            <div class="contact_us">
+                <a href="contact.html"><h4>Наши контакты</h4></a>
+                <p>г. Луцк, Волынская обл., Украина</p>
+                <p>+380 (96) 890-77-11 <br/>
+                <a href="mailto:office&@art-laser.com.ua">office&#64;art-laser.com.ua</a></p>
+            </div>
+            <div class="useful">
+                <h4>Полезная информация</h4>
+                <div>
+                    <a href="">Условия продажи</a>
+                    <a href="">Оплата</a>
+                    <a href="">Доставка</a>
+                </div>
+                <div>
+                    <a href="">История продаж</a>
+                    <a href="">Карьера</a>
+                    <a href="">Обмены &amp; возвраты</a>
+                </div>
+            </div>
+            <div class="subscribe">
+                <h4>Оставайтесь на связи!</h4>
+                <p>Подпишитесь, чтобы узнать о наших последних новостях, продуктах и специальных предложениях только для подписчиков</p>
+                <form class="email" action="" method="post">
+                    <input type="email" placeholder="укажите ваш email">
+                    <div class="but">
+                        <img src="{% static '/img/send.png' %}" alt="">
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; ART-Laser {% now "Y" %}. Все права защищены</p>
+            <div class="icon_soc">
+                <a href="https://www.facebook.com/" target="_blank"><img src="{% static '/img/facebook.png' %}" alt=""></a>
+                <a href="https://twitter.com/" target="_blank"><img src="{% static '/img/twitter.png' %}" alt=""></a>
+                <a href="https://plus.google.com/" target="_blank"><img src="{% static '/img/google.png' %}" alt=""></a>
+                <a href="https://www.pinterest.com/" target="_blank"><img src="{% static '/img/pinterest.png' %}" alt=""></a>
+            </div>
+            <p>Положения &amp; Условия / Конфиденциальность &amp; Cookies</p>
+        </div>
+    </footer> <!-- ====== FOTER END ====== -->
+    {% endblock %}
+</body>
+</html>
