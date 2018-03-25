@@ -29,15 +29,16 @@
             <a class="explore" href="#">показать все<img src="{% static '/img/arrow.png' %}" alt=""></a>
         </div>
         <div class="preview">
-            <a class="block_pic" href="#"><img src="{% static '/img/product_truck.jpg' %}" alt="prod">
+            {% for product in products %}
+            <a class="block_pic" href="#"><img src="/media/{{product.image|default:'products_image/no_image.png'}}" alt="prod">
                 <div class="txt">
                     <div class="b_c"><img src="{% static '/img/arrow.png' %}" alt="arrow"></div>
-                    <h3>Конструктор</h3>
-                    <p>Seat and back with upholstery made of cold cure foam. Steel frame, available in matt powder-coated
-                        black or highly polished chrome.</p>
+                    <h3>{{product.category.name}}</h3>
+                    <p>{{product.short_descript}}</p>
                 </div>
             </a>
-            <a class="block_pic" href="#"><img src="{% static '/img/product_owl.jpg' %}" alt="prod">
+            {% endfor %}
+            <!-- <a class="block_pic" href="#"><img src="{% static '/img/product_owl.jpg' %}" alt="prod">
                 <div class="txt">
                     <div class="b_c"><img src="{% static '/img/arrow.png' %}" alt="arrow"></div>
                     <h3>Светильник</h3>
@@ -60,7 +61,7 @@
                     <p>Seat and back with upholstery made of cold cure foam. Steel frame, available in matt powder-coated
                         black or highly polished chrome.</p>
                 </div>
-            </a>
+            </a> -->
         </div>
         <div class="exclusive">
             <div class="exclusive_left">
@@ -85,12 +86,15 @@
             <a class="explore" href="#">показать все<img src="{% static '/img/arrow.png' %}" alt=""></a>
         </div>
         <div class="pic">
-            <a href="#"><img src="{% static '/img/product_truck.jpg' %}" alt=""></a>
+            {% for product in products %}
+                <a href="#"><img src="/media/{{product.image|default:'products_image/no_image.png'}}" alt=""></a>
+            <!-- <a href="#"><img src="{% static '/img/product_truck.jpg' %}" alt=""></a>
             <a href="product_detail.html"><img src="{% static '/img/product_heli.jpg' %}" alt=""></a>
             <a href="#"><img src="{% static '/img/product_owl.jpg' %}" alt=""></a>
             <a href="#"><img src="{% static '/img/product_cone.jpg' %}" alt=""></a>
             <a href="#"><img src="{% static '/img/product_house.jpg' %}" alt=""></a>
-            <a href="#"><img src="{% static '/img/product_plane.jpg' %}" alt=""></a>
+            <a href="#"><img src="{% static '/img/product_plane.jpg' %}" alt=""></a> -->
+            {% endfor %}
         </div>
         <div class="slider hot_deal">
             <div class="block_text">

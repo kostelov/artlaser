@@ -19,7 +19,9 @@
                 <a class="explore" href="#">показать все<img src="{% static '/img/arrow.png' %}" alt=""></a>
             </div>
                  <div class="pic prod">
-                    <a href="#"><img src="{% static '/img/product_owl.jpg' %}" alt=""></a>
+                     {% for product in products %}
+                        <a href="#"><img src="/media/{{product.image|default:'products_image/no_image.png'}}" alt=""></a>
+<!--                    <a href="#"><img src="{% static '/img/product_owl.jpg' %}" alt=""></a>
                     <a href="product_detail.html"><img src="{% static '/img/product_heli.jpg' %}" alt=""></a>
                     <a href="#"><img src="{% static '/img/product_light.jpg' %}" alt=""></a>
 
@@ -30,10 +32,11 @@
                     <a href="#"><img src="{% static '/img/product_cone.jpg' %}" alt=""></a>
                     <a href="#"><img src="{% static '/img/product_clock.jpg' %}" alt=""></a>
                     <a href="#"><img src="{% static '/img/product_holiday.jpg' %}" alt=""></a>
-<!--
+
                     <a href="#"><img src="{% static '/img/product-41.jpg" alt=""></a>
                     <a href="#"><img src="{% static '/img/product-5.jpg" alt=""></a>
                     <a href="#"><img src="{% static '/img/product-6.jpg" alt=""></a> -->
+                     {% endfor %}
                 </div>
                 <p class="refresh_arrow">
                     <a href=""><img src="{% static '/img/refresh-arrows.png' %}" alt=""></a>

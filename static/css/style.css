@@ -249,6 +249,11 @@ nav a:hover {
     justify-content: space-between;
 }
 
+.preview>a>img {
+    width: 270px;
+    height: 270px;
+}
+
 .block_pic {
     display: block;
     width: 270px;
@@ -265,7 +270,8 @@ nav a:hover {
 }
 
 .block_pic:hover img[alt="prod"] {
-    opacity: 0.2;    
+    opacity: 0.2;
+    box-shadow: 0 0 15px #888;
 }
 
 .block_pic:hover .txt {
@@ -384,8 +390,8 @@ nav a:hover {
 }
 
 .pic img {
-    width: 370px;
-    height: 370px;
+    width: 270px;
+    height: 270px;
     margin-bottom: 30px;
 }
 

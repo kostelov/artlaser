@@ -1,12 +1,17 @@
 from django.shortcuts import render
 import json
 import os
+import random
 from mainapp.models import ProductCategory, Product
 
 def main(request):
     title = 'Главная'
+    categories = ProductCategory.objects.all()
+    products = Product.objects.all()
     context = {
         'title': title,
+        'categories': categories,
+        'products': products[:4],
     }
     return render(request, 'mainapp/index.html', context)
 
@@ -18,7 +23,7 @@ def products(request):
     context = {
         'title': title,
         'categories': categories,
-        'products': products,
+        'products': products[:8],
     }
     return render(request, 'mainapp/products.html', context)
 
