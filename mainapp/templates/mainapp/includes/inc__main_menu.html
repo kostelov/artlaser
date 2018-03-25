@@ -6,20 +6,20 @@
     <input class="search_input" type="search" placeholder="Поиск">
     <ul class="menu">
         <li>
-            <a class="{% if request.resolver_match.url_name == 'main' %} click {% endif %}"
-               href="{% url 'main' %}">
+            <a href="{% url 'main' %}"
+               class="{% if request.resolver_match.url_name == 'main' %} click {% endif %}">
                 ДОМОЙ
             </a>
         </li>
         <li>
-            <a class="{% if request.resolver_match.url_name == 'products' %} click {% endif %}"
-                href="{% url 'products' %}">
+            <a href="{% url 'products:index' %}"
+               class="{% if request.resolver_match.url_name == 'index' %} click {% endif %}">
                 КАТАЛОГ
             </a>
         </li>
         <li>
-            <a class="{% if request.resolver_match.url_name == 'contact' %} click {% endif %}"
-                href="{% url 'contact' %}">
+            <a href="{% url 'contact' %}"
+               class="{% if request.resolver_match.url_name == 'contact' %} click {% endif %}">
                 КОНТАКТЫ
             </a>
         </li>
