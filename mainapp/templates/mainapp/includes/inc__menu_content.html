@@ -1,8 +1,11 @@
 <ul class="menu_content text_style_1">
     <li><a class="click" href="#">ВСЕ</a></li>
-    <li><a href="#">ИГРУШКИ</a></li>
+    {% for category in categories %}
+        <li><a href="#">{{ category.name.upper }}</a></li>
+    {% endfor %}
+    <!-- <li><a href="#">ИГРУШКИ</a></li>
     <li><a href="">СУВЕНИРЫ</a></li>
-    <!-- <li><a href="">УКРАШЕНИЯ</a></li>
-    <li><a href="">МЕТРИКИ</a></li> -->
-    <li><a href="">СВЕТИЛЬНИКИ</a></li>
+     <li><a href="">УКРАШЕНИЯ</a></li>
+    <li><a href="">МЕТРИКИ</a></li>
+    <li><a href="">СВЕТИЛЬНИКИ</a></li>-->
 </ul>

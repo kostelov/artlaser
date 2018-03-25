@@ -1,10 +1,7 @@
 from django.shortcuts import render
 import json
 import os
-
-
-# Create your views here.
-
+from mainapp.models import ProductCategory, Product
 
 def main(request):
     title = 'Главная'
@@ -16,8 +13,12 @@ def main(request):
 
 def products(request):
     title = 'Каталог'
+    categories = ProductCategory.objects.all()
+    products = Product.objects.all()
     context = {
         'title': title,
+        'categories': categories,
+        'products': products,
     }
     return render(request, 'mainapp/products.html', context)
 

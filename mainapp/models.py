@@ -20,4 +20,4 @@ class Product(models.Model):
     quantity = models.PositiveIntegerField(verbose_name='Кол-во на складе', default=0)
 
     def __str__(self):
-        return '{} ({})'.format(self.name, self.category)
+        return '{} ({})'.format(self.name, self.category.name)
