@@ -8,6 +8,13 @@ class ProductCategory(models.Model):
     def __str__(self):
         return self.name
 
+    def upload_to_db(self, category):
+        new_category = ProductCategory(name=category)
+        try:
+            new_category.save()
+        except Exception as e:
+            pass
+
 
 class Product(models.Model):
     category = models.ForeignKey(ProductCategory, on_delete=models.CASCADE)
@@ -21,3 +28,20 @@ class Product(models.Model):
 
     def __str__(self):
         return '{} ({})'.format(self.name, self.category.name)
+
+    def upload_to_db(self, product):
+        row = product
+        category = ProductCategory.objects.get(name=row[0])
+        name = row[1]
+        vendor_id = row[2]
+        image = row[3]
+        short_descript = row[4]
+        description = row[5]
+        price = row[6]
+        quantity = row[7]
+        prod = Product(category=category, name=name, vendor_id=vendor_id, image=image, short_descript=short_descript,
+                       description=description, price=price, quantity=quantity)
+        try:
+            prod.save()
+        except Exception as e:
+            pass

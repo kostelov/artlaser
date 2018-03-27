@@ -1,7 +1,6 @@
 from django.shortcuts import render
 import json
 import os
-import random
 from mainapp.models import ProductCategory, Product
 
 def main(request):
