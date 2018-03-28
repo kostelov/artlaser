@@ -1,0 +1,23 @@
+{% extends 'authapp/base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+    {{ block.super }} - {{ title }}
+{% endblock%}
+
+{% block content %}
+    <div class="register-form">
+        <form action="{% url 'auth:edit' %}" method="post" enctype="multipart/form-data">
+            <h2 class="text-center">Редактирование профиля</h2>
+            {% csrf_token %}
+            {{ edit_form.as_p }}
+            <div class="user_avatar"><img src="/media/{{ user.avatar|default:'products_image/gravatar.png' }}"></div>
+            <br>
+            <input class="form-control btn btn-primary btn-block" type="submit" value="Cохранить">
+        </form>
+        <!--<button class="btn btn-round form-control last">-->
+        <br>
+           <p class="text-center"><a href="{% url 'main' %}" class="">назад</a></p>
+        <!--</button>-->
+    </div>
+{% endblock %}

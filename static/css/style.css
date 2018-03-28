@@ -698,7 +698,7 @@ nav a:hover {
     opacity: 0.3;
 }
 
-.btn {
+.btn-order {
     display: block;
     text-align: center;
     width: 510px;
@@ -715,17 +715,17 @@ nav a:hover {
     margin-bottom: 50px;
 }
 
-.btn:hover {
+.btn-order:hover {
     background-color: #E74555;
 }
 
-.btn:active {
+.btn-order:active {
     box-shadow: 0px 0px 3px #000;
     position: relative;
     top: 3px;
 }
 
-.btn img {
+.btn-order img {
     margin-left: 27px;
     width: 14px;
     height: 20px;
@@ -861,6 +861,42 @@ footer {
 
 .icon_soc img:hover {
     box-shadow: 0 0 5px #000;
+}
+
+/*.user_avatar {
+    float: left;
+}*/
+
+.user_avatar img {
+    width: 120px;
+    height: 120px;
+}
+
+.register-form {
+	width: 420px;
+   	margin: 50px auto;
+}
+
+.login-form {
+	width: 380px;
+   	margin: 50px auto;
+}
+.login-form form {
+    margin-bottom: 15px;
+    background: #f7f7f7;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    padding: 30px;
+}
+.login-form h2 {
+    margin: 0 0 15px;
+}
+.form-control, .btn {
+    min-height: 38px;
+    border-radius: 2px;
+}
+.btn {
+    font-size: 15px;
+    font-weight: bold;
 }
 
 .clearfix:after {

@@ -24,10 +24,19 @@
             </a>
         </li>
         <li>
-            <a href="{% url 'auth:login' %}"
-                class="{% if request.resolver_match.url_name == 'login' %} click {% endif %}">
-                ВОЙТИ
-            </a>
+            {% if user.is_authenticated %}
+                <a href="{% url 'auth:edit' %}">{{user.username}}</a>
+            {% endif %}
+        </li>
+        <li>
+            {% if user.is_authenticated %}
+                <a href="{% url 'auth:logout' %}">ВЫЙТИ</a>
+            {% else %}
+                <a href="{% url 'auth:login' %}"
+                    class="{% if request.resolver_match.url_name == 'login' %} click {% endif %}">
+                    ВОЙТИ
+                </a>
+            {% endif %}
         </li>
     </ul>
 </header>
