@@ -15,14 +15,21 @@ def main(request):
     return render(request, 'mainapp/index.html', context)
 
 
-def products(request):
+def products(request, pk=None):
     title = 'Каталог'
-    categories = ProductCategory.objects.all()
+    categories = []
+    all_categories = {
+        'pk': 0,
+        'name': 'все'
+    }
     products = Product.objects.all()
+    categories.append(all_categories)
+    categories.extend(ProductCategory.objects.all())
+
     context = {
         'title': title,
         'categories': categories,
-        'products': products[:8],
+        'products': products[:4],
     }
     return render(request, 'mainapp/products.html', context)
 

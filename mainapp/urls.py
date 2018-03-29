@@ -6,4 +6,5 @@ app_name = 'mainapp'
 
 urlpatterns = [
     re_path(r'^$', mainapp.products, name='index'),
+    re_path(r'^category/(\d+)/$', mainapp.products, name='category'),
 ]

@@ -2,63 +2,29 @@
 {% load staticfiles %}
 
 {% block title %}
-    {{ block.super }} - {{ title }}
+{{ block.super }} - {{ title }}
 {% endblock%}
 
 {% block container %}
-   <!-- ====== CONTAINER ====== -->
-    <div class="container clearfix">
-        <div class="hero-back">
-            {% include 'mainapp/includes/inc__main_menu.html' %}
-            <div class="h2">Каталог товаров</div>
+<!-- ====== CONTAINER ====== -->
+<div class="container clearfix">
+    <!--<div class="hero-back">-->
+        {% include 'mainapp/includes/inc__main_menu.html' %}
+        <!--<div class="h2">Каталог товаров</div>-->
+    <!--</div>-->
+
+    <!-- ====== CONTENT ====== -->
+    <div class="content">
+        {% include 'mainapp/includes/inc__menu_content.html' %}
+        <div class="product_header">
+            <h2>Похожие товары</h2>
+            <a class="explore" href="#">показать все<img src="{% static '/img/arrow.png' %}" alt=""></a>
         </div>
-        <!-- ====== CONTENT ====== --> 
-        <div class="content">
-            <div class="product_header">
-                {% include 'mainapp/includes/inc__menu_content.html' %}
-                <a class="explore" href="#">показать все<img src="{% static '/img/arrow.png' %}" alt=""></a>
-            </div>
-                 <div class="pic prod">
-                     {% for product in products %}
-                        <a href="#"><img src="/media/{{product.image|default:'products_image/no_image.png'}}" alt=""></a>
-<!--                    <a href="#"><img src="{% static '/img/product_owl.jpg' %}" alt=""></a>
-                    <a href="product_detail.html"><img src="{% static '/img/product_heli.jpg' %}" alt=""></a>
-                    <a href="#"><img src="{% static '/img/product_light.jpg' %}" alt=""></a>
-
-                    <a href="#"><img src="{% static '/img/product_truck.jpg' %}" alt=""></a>
-                    <a href="#"><img src="{% static '/img/product_house.jpg' %}" alt=""></a>
-                    <a href="#"><img src="{% static '/img/product_plane.jpg' %}" alt=""></a>
-
-                    <a href="#"><img src="{% static '/img/product_cone.jpg' %}" alt=""></a>
-                    <a href="#"><img src="{% static '/img/product_clock.jpg' %}" alt=""></a>
-                    <a href="#"><img src="{% static '/img/product_holiday.jpg' %}" alt=""></a>
-
-                    <a href="#"><img src="{% static '/img/product-41.jpg" alt=""></a>
-                    <a href="#"><img src="{% static '/img/product-5.jpg" alt=""></a>
-                    <a href="#"><img src="{% static '/img/product-6.jpg" alt=""></a> -->
-                     {% endfor %}
-                </div>
-                <p class="refresh_arrow">
-                    <a href=""><img src="{% static '/img/refresh-arrows.png' %}" alt=""></a>
-                </p>
-            <div class="exclusive">
-                <div class="exclusive_left">
-                    <div class="block_text_exclusive">
-                        <h3>эксклюзив</h3>
-                        <h2>Коробка</h2>
-                        <p>Коллекционная коробка. Тонировка и гравировка.</p>
-                        <a class="button_order" href="#">Заказать<img src="{% static '/img/arrow.png' %}" alt=""></a>
-                    </div>
-                </div>
-                <div class="exclusive_right">
-                    <div class="block_text_exclusive">
-                        <h3>эксклюзив</h3>
-                        <h2>Светильник</h2>
-                        <p>Уникальная форма. Новинка на рынке.</p>
-                        <a class="button_order" href="#">Заказать<img src="{% static '/img/arrow.png' %}" alt=""></a>
-                    </div>
-                </div>
-            </div>
-        </div>    <!-- ====== CONTENT END ====== -->
-    </div>     <!-- ====== CONTAINER END ====== -->
-{% endblock%}
+        <div class="pic prod">
+            {% for product in products %}
+            <a href="#"><img src="/media/{{product.image|default:'products_image/no_image.png'}}" alt=""></a>
+            {% endfor %}
+        </div>
+    </div>    <!-- ====== CONTENT END ====== -->
+</div>     <!-- ====== CONTAINER END ====== -->
+{% endblock %}

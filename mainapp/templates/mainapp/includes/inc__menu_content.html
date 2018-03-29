@@ -1,11 +1,10 @@
-<ul class="menu_content text_style_1">
-    <li><a class="click" href="#">ВСЕ</a></li>
+<ul class="menu_products">
     {% for category in categories %}
-        <li><a href="#">{{ category.name.upper }}</a></li>
+        <li>
+            <a href="{% url 'products:category' category.pk %}"
+            class="{% if request.resolver_match.args.0|add:0 == category.pk %} active {% endif %}">
+                {{ category.name.upper }}
+            </a>
+        </li>
     {% endfor %}
-    <!-- <li><a href="#">ИГРУШКИ</a></li>
-    <li><a href="">СУВЕНИРЫ</a></li>
-     <li><a href="">УКРАШЕНИЯ</a></li>
-    <li><a href="">МЕТРИКИ</a></li>
-    <li><a href="">СВЕТИЛЬНИКИ</a></li>-->
 </ul>
