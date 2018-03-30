@@ -1,0 +1,19 @@
+{% extends 'mainapp/base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+    {{ block.super }} - {{ title }}
+{% endblock%}
+
+{% block container %}
+    <div class="container clearfix">
+        <div class="hero-back">
+            {% include 'mainapp/includes/inc__main_menu.html' %}
+            <div class="h2">Ваши покупки</div>
+        </div>
+        <!-- ====== CONTENT ====== --> 
+        <div class="content">
+
+        </div>    <!-- ====== CONTENT END ====== -->
+    </div>     <!-- ====== CONTAINER END ====== -->
+{% endblock%}

@@ -386,13 +386,15 @@ nav a:hover {
     padding: 0 98px 120px;
     display: flex;
     /*justify-content: space-between;*/
-    justify-content: space-evenly;
+    justify-content: flex-start;
     flex-wrap: wrap; 
 }
 
 .pic img {
     width: 270px;
     height: 270px;
+    margin-left: 10px;
+    margin-right: 10px;
     margin-bottom: 30px;
 }
 
