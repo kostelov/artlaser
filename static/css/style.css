@@ -385,7 +385,8 @@ nav a:hover {
 .pic {
     padding: 0 98px 120px;
     display: flex;
-    justify-content: space-between;
+    /*justify-content: space-between;*/
+    justify-content: space-evenly;
     flex-wrap: wrap; 
 }
 

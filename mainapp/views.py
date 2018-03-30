@@ -18,18 +18,26 @@ def main(request):
 def products(request, pk=None):
     title = 'Каталог'
     categories = []
+    products = []
     all_categories = {
         'pk': 0,
         'name': 'все'
     }
-    products = Product.objects.all()
+
     categories.append(all_categories)
     categories.extend(ProductCategory.objects.all())
+
+    if pk:
+        pk = int(pk)
+        if pk == 0:
+            products = Product.objects.all()
+        else:
+            products = Product.objects.filter(category__pk=pk)
 
     context = {
         'title': title,
         'categories': categories,
-        'products': products[:4],
+        'products': products,
     }
     return render(request, 'mainapp/products.html', context)
 
