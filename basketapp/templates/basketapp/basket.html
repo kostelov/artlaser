@@ -15,6 +15,7 @@
         <!-- ====== CONTENT ====== -->
         <div class="content">
             {#{ request.resolver_match }#}
+            {% if basket %}
                 <table>
                     <thead>
                         <tr>
@@ -47,6 +48,11 @@
                         </tr>
                     </tfoot>
                 </table>
+            {% else %}
+                <div style="align: center; margin: 100px auto;">
+                    <h2>Корзина пуста</h2>
+                </div>
+            {% endif %}
         </div>    <!-- ====== CONTENT END ====== -->
     </div>     <!-- ====== CONTAINER END ====== -->
 {% endblock%}
