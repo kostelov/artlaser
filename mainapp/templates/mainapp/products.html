@@ -27,7 +27,9 @@
             </div>
             <div class="pic prod">
                 {% for product in products %}
-                    <a href="{% url 'basket:product_add' product.pk %}"><img src="/media/{{product.image|default:'products_image/no_image.png'}}" alt=""></a>
+                    <a href="{% url 'basket:product_add' product.pk %}">
+                        <img src="/media/{{product.image|default:'products_image/no_image.png'}}" alt="">
+                    </a>
                 {% endfor %}
             </div>
         {% endif %}

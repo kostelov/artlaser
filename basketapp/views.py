@@ -3,10 +3,19 @@ from mainapp.models import Product
 from basketapp.models import Basket
 
 
-def main(requset):
+def main_basket(requset):
     title = 'Корзина'
+    count_product = 0
+    total = 0
+    basket = Basket.get_basket(requset)
+    for item in basket:
+        count_product += int(item.quantity)
+        total += int(item.product.price) * item.quantity
     context = {
         'title': title,
+        'basket': basket,
+        'count_product': count_product,
+        'total': total,
     }
     return render(requset, 'basketapp/basket.html', context)
 

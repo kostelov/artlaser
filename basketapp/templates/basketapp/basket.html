@@ -13,7 +13,11 @@
         </div>
         <!-- ====== CONTENT ====== --> 
         <div class="content">
-
+            {#{ request.resolver_match }#}
+            {% for item in basket %}
+                <p>{{ item.product.name }} - {{ item.quantity }} - {{ item.product.price }}</p>
+            {% endfor %}
+            <p>Всего единиц товара: {{ count_product }} На общую сумму: {{ total }}</p>
         </div>    <!-- ====== CONTENT END ====== -->
     </div>     <!-- ====== CONTAINER END ====== -->
 {% endblock%}

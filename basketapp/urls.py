@@ -5,6 +5,6 @@ import basketapp.views as basketapp
 app_name = 'basketapp'
 
 urlpatterns = [
-    re_path(r'^$', basketapp.main, name='main'),
+    re_path(r'^$', basketapp.main_basket, name='main_basket'),
     re_path(r'^product/add/(\d+)$', basketapp.product_add, name='product_add'),
 ]
