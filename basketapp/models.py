@@ -14,7 +14,6 @@ class Basket(models.Model):
     def get_basket(request):
         count_product = 0
         total = 0
-        # basket_items = []
         if request.user.is_authenticated:
             basket = Basket.objects.filter(user=request.user)
             for item in basket:
@@ -22,7 +21,4 @@ class Basket(models.Model):
                 total += int(item.total_price)
         else:
             basket = []
-        # basket_items.append(count_product)
-        # basket_items.append(total)
-        # basket_items.extend(basket)
         return basket, count_product, total

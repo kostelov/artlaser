@@ -392,11 +392,13 @@ nav a:hover {
 
 table {
     border-collapse: collapse;
-    width: 100%;
+    width: 75%;
+    margin: auto;
 }
 
 thead {
     background: #f0f0f2;
+    color: #395870;
 }
 
 th, td {
@@ -409,8 +411,18 @@ tbody tr:nth-child(even) {
   background: #f0f0f2;
 }
 
-.td-price td-qty td-total {
+.td-price, .td-qty, .td-total {
     text-align: center;
+}
+
+tfoot {
+  text-align: right;
+}
+
+tfoot tr:last-child {
+  background: #f0f0f2;
+  color: #395870;
+  font-weight: bold;
 }
 
 .img_min {

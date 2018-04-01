@@ -15,7 +15,7 @@
         <!-- ====== CONTENT ====== -->
         <div class="content">
             {#{ request.resolver_match }#}
-                <table class="table-border">
+                <table>
                     <thead>
                         <tr>
                             <th scope="col">Товар</th>
@@ -36,9 +36,17 @@
                         </tr>
                     {% endfor %}
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="4">Всего единиц товара</td>
+                            <td class="td-qty">{{ count_product }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="4">На общую сумму</td>
+                            <td class="td-total">{{ total }}</td>
+                        </tr>
+                    </tfoot>
                 </table>
-                <!--<p><img class="img_min" src="/media/{{ item.product.image }}" alt=""> {{ item.product.name }} - {{ item.quantity }} - {{ item.total_price }}</p>-->
-            <p>Всего единиц товара: {{ count_product }} На общую сумму: {{ total }}</p>
         </div>    <!-- ====== CONTENT END ====== -->
     </div>     <!-- ====== CONTAINER END ====== -->
 {% endblock%}
