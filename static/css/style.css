@@ -407,8 +407,8 @@ th, td {
   border: 1px solid #cecfd5;
 }
 
-tbody tr:nth-child(even) {
-  background: #f0f0f2;
+tr img {
+    border: 1px solid #cecfd5;
 }
 
 .td-price, .td-qty, .td-total {

@@ -18,7 +18,7 @@ class Basket(models.Model):
             basket = Basket.objects.filter(user=request.user)
             for item in basket:
                 count_product += int(item.quantity)
-                total += int(item.total_price)
+                total += item.total_price
         else:
             basket = []
         return basket, count_product, total
