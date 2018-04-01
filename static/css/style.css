@@ -390,6 +390,34 @@ nav a:hover {
     flex-wrap: wrap; 
 }
 
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+thead {
+    background: #f0f0f2;
+}
+
+th, td {
+  padding: 10px 15px;
+  vertical-align: middle;
+  border: 1px solid #cecfd5;
+}
+
+tbody tr:nth-child(even) {
+  background: #f0f0f2;
+}
+
+.td-price td-qty td-total {
+    text-align: center;
+}
+
+.img_min {
+    width: 100px;
+    height: 100px;
+}
+
 .pic img {
     width: 270px;
     height: 270px;

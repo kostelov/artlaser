@@ -5,18 +5,39 @@
     {{ block.super }} - {{ title }}
 {% endblock%}
 
+
 {% block container %}
     <div class="container clearfix">
         <div class="hero-back">
             {% include 'mainapp/includes/inc__main_menu.html' %}
             <div class="h2">Ваши покупки</div>
         </div>
-        <!-- ====== CONTENT ====== --> 
+        <!-- ====== CONTENT ====== -->
         <div class="content">
             {#{ request.resolver_match }#}
-            {% for item in basket %}
-                <p>{{ item.product.name }} - {{ item.quantity }} - {{ item.product.price }}</p>
-            {% endfor %}
+                <table class="table-border">
+                    <thead>
+                        <tr>
+                            <th scope="col">Товар</th>
+                            <th scope="col">Наименование</th>
+                            <th scope="col">Цена</th>
+                            <th scope="col">К-во</th>
+                            <th scope="col">Стоимость</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in basket %}
+                        <tr>
+                            <th scope="row"><img class="img_min" src="/media/{{ item.product.image }}" alt=""></th>
+                            <td>{{ item.product.name }}</td>
+                            <td class="td-price">{{ item.product.price }}</td>
+                            <td class="td-qty">{{ item.quantity }}</td>
+                            <td class="td-total">{{ item.total_price }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <!--<p><img class="img_min" src="/media/{{ item.product.image }}" alt=""> {{ item.product.name }} - {{ item.quantity }} - {{ item.total_price }}</p>-->
             <p>Всего единиц товара: {{ count_product }} На общую сумму: {{ total }}</p>
         </div>    <!-- ====== CONTENT END ====== -->
     </div>     <!-- ====== CONTAINER END ====== -->

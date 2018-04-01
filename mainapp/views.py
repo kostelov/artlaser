@@ -9,11 +9,12 @@ def main(request):
     title = 'Главная'
     categories = ProductCategory.objects.all()
     products = Product.objects.all()
-    basket = Basket.get_basket(request)
+    basket, count_product, total_price = Basket.get_basket(request)
     context = {
         'title': title,
         'categories': categories,
         'products': products[:4],
+        'count_product': count_product,
         'basket': basket,
     }
     return render(request, 'mainapp/index.html', context)
@@ -23,7 +24,7 @@ def products(request, pk=None):
     title = 'Каталог'
     categories = []
     products = []
-    basket = Basket.get_basket(request)
+    basket, count_product, total_price = Basket.get_basket(request)
     all_categories = {
         'pk': 0,
         'name': 'все'
@@ -43,6 +44,7 @@ def products(request, pk=None):
         'title': title,
         'categories': categories,
         'products': products,
+        'count_product': count_product,
         'basket': basket,
     }
     return render(request, 'mainapp/products.html', context)
@@ -56,10 +58,11 @@ def contact(request):
         locations = json.load(file)
 
     title = 'Контакты'
-    basket = Basket.get_basket(request)
+    basket, count_product, total_price = Basket.get_basket(request)
     context = {
         'title': title,
         'locations': locations,
+        'count_product': count_product,
         'basket': basket,
     }
     return render(request, 'mainapp/contact.html', context)

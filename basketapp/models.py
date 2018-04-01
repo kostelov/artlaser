@@ -8,21 +8,21 @@ class Basket(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(verbose_name='количество', default=0)
     add_datetime = models.DateTimeField(verbose_name='время добавления', auto_now_add=True)
-    # total_price = models.DecimalField(verbose_name='стоимость', max_digits=8, decimal_places=2, default=0)
+    total_price = models.DecimalField(verbose_name='стоимость', max_digits=8, decimal_places=2, default=0)
 
     @staticmethod
     def get_basket(request):
-        # count_product = 0
-        # total = 0
+        count_product = 0
+        total = 0
         # basket_items = []
         if request.user.is_authenticated:
             basket = Basket.objects.filter(user=request.user)
-            # for item in basket:
-            #     count_product += int(item.quantity)
-            #     total += int(item.product.price) * item.quantity
+            for item in basket:
+                count_product += int(item.quantity)
+                total += int(item.total_price)
         else:
             basket = []
         # basket_items.append(count_product)
         # basket_items.append(total)
         # basket_items.extend(basket)
-        return basket
+        return basket, count_product, total

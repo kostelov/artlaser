@@ -5,12 +5,7 @@ from basketapp.models import Basket
 
 def main_basket(requset):
     title = 'Корзина'
-    count_product = 0
-    total = 0
-    basket = Basket.get_basket(requset)
-    for item in basket:
-        count_product += int(item.quantity)
-        total += int(item.product.price) * item.quantity
+    basket, count_product, total = Basket.get_basket(requset)
     context = {
         'title': title,
         'basket': basket,
@@ -25,8 +20,9 @@ def product_add(request, pk):
     basket_object = Basket.objects.filter(user=request.user, product=product).first()
     if basket_object:
         basket_object.quantity += 1
+        basket_object.total_price += basket_object.product.price
         basket_object.save()
     else:
-        Basket.objects.create(user=request.user, product=product, quantity=1)
+        Basket.objects.create(user=request.user, product=product, total_price=product.price, quantity=1)
 
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
