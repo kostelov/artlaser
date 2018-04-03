@@ -1,6 +1,7 @@
-from django.shortcuts import render
 import json
 import os
+import random
+from django.shortcuts import render
 from mainapp.models import ProductCategory, Product
 from basketapp.models import Basket
 
@@ -10,12 +11,15 @@ def main(request):
     categories = ProductCategory.objects.all()
     products = Product.objects.all()
     basket, count_product, total_price = Basket.get_basket(request)
+    hot_product = get_hot_product()
+    same_products = get_same_product(hot_product)
     context = {
         'title': title,
         'categories': categories,
         'products': products[:4],
         'count_product': count_product,
         'basket': basket,
+        'same_products': same_products,
     }
     return render(request, 'mainapp/index.html', context)
 
@@ -33,6 +37,9 @@ def products(request, pk=None):
     categories.append(all_categories)
     categories.extend(ProductCategory.objects.all())
 
+    hot_product = get_hot_product()
+    same_products = get_same_product(hot_product)
+
     if pk:
         pk = int(pk)
         if pk == 0:
@@ -40,14 +47,25 @@ def products(request, pk=None):
         else:
             products = Product.objects.filter(category__pk=pk)
 
+        context = {
+            'title': title,
+            'categories': categories,
+            'products': products,
+            'count_product': count_product,
+            'basket': basket,
+        }
+        return render(request, 'mainapp/products.html', context)
+
     context = {
         'title': title,
         'categories': categories,
         'products': products,
         'count_product': count_product,
         'basket': basket,
+        'hot_product': hot_product,
+        'same_products': same_products,
     }
-    return render(request, 'mainapp/products.html', context)
+    return render(request, 'mainapp/product_detail.html', context)
 
 
 def contact(request):
@@ -66,3 +84,13 @@ def contact(request):
         'basket': basket,
     }
     return render(request, 'mainapp/contact.html', context)
+
+
+def get_hot_product():
+    products = Product.objects.all()
+    return random.sample(list(products), 1)[0]
+
+
+def get_same_product(hot_product):
+    same_products = Product.objects.filter(category=hot_product.category).exclude(pk=hot_product.pk)[:4]
+    return same_products

@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'mainapp',
     'authapp',
     'basketapp',
-    'phonenumber_field',
 ]
 
 MIDDLEWARE = [

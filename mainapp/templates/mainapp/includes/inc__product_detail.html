@@ -1,0 +1,31 @@
+{% load staticfiles %}
+
+
+<div>
+    <div class="prod_pic"><a href="/media/{{ hot_product.image }}" target="_blank">
+        <img src="/media/{{ hot_product.image }}" alt=""></a>
+    </div>
+    <div class="control">
+        <a href="#"><img src="/media/{{ hot_product.image }}" alt="1"></a>
+        <a href="#"><img src="/media/{{ hot_product.image }}" alt="1"></a>
+        <a href="#"><img src="/media/{{ hot_product.image }}" alt=""></a>
+    </div>
+</div>
+<div class="prod_text">
+    <h3>{{ hot_product.name }}</h3>
+    <!--<h4>Горячее предложение</h4>-->
+    <p class="price">{{ hot_product.price }}<span>&#8372;</span></p>
+    <a class="btn-order" href="{% url 'basket:product_add' hot_product.pk%}">Заказать
+        <img src="{% static '/img/arrow_white.png' %}" alt="">
+    </a>
+    <div class="text">
+        <p>{{ hot_product.short_descript }}</p>
+        <!--<p>&nbsp;</p>-->
+        <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut-->
+        <!--labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco-->
+        <!--laboris nisi ut aliquip ex ea commodo consequat.</p>-->
+        <!--<p>&nbsp;</p>-->
+        <!--<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla-->
+        <!--pariatur. Excepteur sint occaecat cupidatat non proident.</p>-->
+    </div>
+</div>

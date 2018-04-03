@@ -728,8 +728,8 @@ tfoot tr:last-child {
 }
 
 .prod_pic {
-    width: 570px;
-    height: 570px;
+    width: 600px;
+    height: 600px;
     margin-bottom: 10px;
 }
 
@@ -738,7 +738,14 @@ tfoot tr:last-child {
     justify-content: center;
 }
 
+.control img {
+    width: 100px;
+    height: 100px;
+}
+
 .control img[alt="1"]:hover {
+    width: 100px;
+    height: 100px;
     opacity: 0.3;
 }
 

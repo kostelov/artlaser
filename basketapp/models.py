@@ -4,7 +4,7 @@ from mainapp.models import Product
 
 
 class Basket(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='basket', on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(verbose_name='количество', default=0)
     add_datetime = models.DateTimeField(verbose_name='время добавления', auto_now_add=True)
@@ -15,7 +15,8 @@ class Basket(models.Model):
         count_product = 0
         total = 0
         if request.user.is_authenticated:
-            basket = Basket.objects.filter(user=request.user)
+            basket = request.user.basket.all()
+                # Basket.objects.filter(user=request.user)
             for item in basket:
                 count_product += int(item.quantity)
                 total += item.total_price

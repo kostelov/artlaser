@@ -1,3 +1,4 @@
+import re
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
 from django import forms
 from authapp.models import ShopUser
@@ -34,6 +35,16 @@ class ShopUserRegisterForm(UserCreationForm):
             raise forms.ValidationError('Слишком молод еще!')
         return data
 
+    def clean_phone(self):
+        # Проверям номер телефона согласно стандарта E.164
+        tmpl = re.compile(r'^\+{1}\d{10,14}\d$')
+        data = self.cleaned_data['phone']
+        result = re.match(tmpl, data)
+        if not result:
+            raise forms.ValidationError('Укажите номер в международном формате')
+        else:
+            return data
+
 
 class ShopUserEditForm(UserChangeForm):
     class Meta:
@@ -57,3 +68,13 @@ class ShopUserEditForm(UserChangeForm):
         if data < 18:
             raise forms.ValidationError('Слишком молод еще!')
         return data
+
+    def clean_phone(self):
+        # Проверям номер телефона согласно стандарта E.164
+        tmpl = r'^\+{1}\d{10,14}\d$'
+        data = self.cleaned_data['phone']
+        result = re.match(tmpl, data)
+        if not result:
+            raise forms.ValidationError('Укажите номер в международном формате')
+        else:
+            return data
