@@ -19,40 +19,14 @@
         <div class="product">
             {% include 'mainapp/includes/inc__product_detail.html' %}
         </div>
-        <!--<div class="product">-->
-        <!--<div>-->
-        <!--<div class="prod_pic"><a href="img/slider1.jpg" target="_blank"><img src="img/slider1.jpg" alt="chair"></a>-->
-        <!--</div>-->
-        <!--<div class="control">-->
-        <!--<a href="#"><img src="img/controll.jpg" alt="1"></a>-->
-        <!--<a href="#"><img src="img/controll11.jpg" alt="1"></a>-->
-        <!--<a href="#"><img src="img/controll2.jpg" alt=""></a>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--<div class="prod_text">-->
-        <!--<h3>Fishnet Chair</h3>-->
-        <!--<h4>Hot Deal</h4>-->
-        <!--<p class="price"><span>$</span> 36.7<span>/sq</span></p>-->
-        <!--<a class="btn-order" href="#">Order Us<img src="img/arrow_white.png" alt=""></a>-->
-        <!--<div class="text">-->
-        <!--<p>The majesty of Mountains - Ugmonk style.</p>-->
-        <!--<p>&nbsp;</p>-->
-        <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut-->
-        <!--labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco-->
-        <!--laboris nisi ut aliquip ex ea commodo consequat.</p>-->
-        <!--<p>&nbsp;</p>-->
-        <!--<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla-->
-        <!--pariatur. Excepteur sint occaecat cupidatat non proident.</p>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
+
         <div class="product_header">
             <h2>Похожие товары</h2>
             <a class="explore" href="#">показать все<img src="{% static '/img/arrow.png' %}" alt=""></a>
         </div>
         <div class="pic">
             {% for product in same_products %}
-                <a href="{% url 'basket:product_add' product.pk %}"><img src="/media/{{ product.image }}" alt=""></a>
+                <a href="{% url 'products:product' product.pk %}"><img src="/media/{{ product.image }}" alt=""></a>
             <!--<a href="#"><img src="img/product-21.jpg" alt=""></a>-->
             <!--<a href="#"><img src="img/product-31.jpg" alt=""></a>-->
             {% endfor %}

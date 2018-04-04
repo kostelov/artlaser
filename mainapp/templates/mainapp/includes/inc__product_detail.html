@@ -13,7 +13,10 @@
 </div>
 <div class="prod_text">
     <h3>{{ hot_product.name }}</h3>
-    <!--<h4>Горячее предложение</h4>-->
+    {% if hot %}
+    <!--вывводим в случае горячего предложения иначе это выбраный товар-->
+        <h4>Горячее предложение</h4>
+    {% endif %}
     <p class="price">{{ hot_product.price }}<span>&#8372;</span></p>
     <a class="btn-order" href="{% url 'basket:product_add' hot_product.pk%}">Заказать
         <img src="{% static '/img/arrow_white.png' %}" alt="">

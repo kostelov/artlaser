@@ -1,10 +1,22 @@
 import json
 import os
 import random
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from mainapp.models import ProductCategory, Product
 from basketapp.models import Basket
 
+
+def get_categories():
+    categories = []
+    all_categories = {
+        'pk': 0,
+        'name': 'все'
+    }
+
+    categories.append(all_categories)
+    categories.extend(ProductCategory.objects.all())
+
+    return categories
 
 def main(request):
     title = 'Главная'
@@ -26,18 +38,9 @@ def main(request):
 
 def products(request, pk=None):
     title = 'Каталог'
-    categories = []
     products = []
     basket, count_product, total_price = Basket.get_basket(request)
-    all_categories = {
-        'pk': 0,
-        'name': 'все'
-    }
-
-    categories.append(all_categories)
-    categories.extend(ProductCategory.objects.all())
-
-
+    categories = get_categories()
 
     if pk:
         pk = int(pk)
@@ -66,8 +69,30 @@ def products(request, pk=None):
         'basket': basket,
         'hot_product': hot_product,
         'same_products': same_products,
+        'hot': True,
     }
     return render(request, 'mainapp/product_detail.html', context)
+
+
+def product(request, pk):
+    product = get_object_or_404(Product, pk=pk)
+    categories = get_categories()
+    basket, count_product, total_price = Basket.get_basket(request)
+    same_products = get_same_product(product)
+    title = product.name
+
+    context = {
+        'title': title,
+        'categories': categories,
+        'hot_product': product,
+        'basket': basket,
+        'count_product': count_product,
+        'same_products': same_products,
+        'hot': False,
+    }
+
+    return render(request, 'mainapp/product_detail.html', context)
+
 
 
 def contact(request):
