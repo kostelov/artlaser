@@ -26,3 +26,9 @@ def product_add(request, pk):
         Basket.objects.create(user=request.user, product=product, total_price=product.price, quantity=1)
 
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+def product_del(request, pk):
+    basket_item = get_object_or_404(Basket, pk=pk)
+    basket_item.delete()
+
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))

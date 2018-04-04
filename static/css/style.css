@@ -411,6 +411,14 @@ tr img {
     border: 1px solid #cecfd5;
 }
 
+td input {
+    width: 40px;
+}
+
+td a:hover {
+    opacity: 0.6;
+}
+
 .td-price, .td-qty, .td-total {
     text-align: center;
 }

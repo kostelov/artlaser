@@ -32,7 +32,12 @@
                             <th scope="row"><img class="img_min" src="/media/{{ item.product.image }}" alt=""></th>
                             <td>{{ item.product.name }}</td>
                             <td class="td-price">{{ item.product.price }}</td>
-                            <td class="td-qty">{{ item.quantity }}</td>
+                            <td class="td-qty">
+                                <input type="number" name="{{ item.pk }}" min="0" value="{{ item.quantity }}">
+                                <a href="{% url 'basket:product_del' item.pk %}">
+                                    <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
+                                </a>
+                            </td>
                             <td class="td-total">{{ item.total_price }}</td>
                         </tr>
                     {% endfor %}

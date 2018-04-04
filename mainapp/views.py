@@ -37,8 +37,7 @@ def products(request, pk=None):
     categories.append(all_categories)
     categories.extend(ProductCategory.objects.all())
 
-    hot_product = get_hot_product()
-    same_products = get_same_product(hot_product)
+
 
     if pk:
         pk = int(pk)
@@ -55,6 +54,9 @@ def products(request, pk=None):
             'basket': basket,
         }
         return render(request, 'mainapp/products.html', context)
+
+    hot_product = get_hot_product()
+    same_products = get_same_product(hot_product)
 
     context = {
         'title': title,
