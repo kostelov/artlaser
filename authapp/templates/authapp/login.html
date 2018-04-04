@@ -10,6 +10,9 @@
         <form action="{% url 'auth:login' %}" method="post">
             <h2 class="text-center">Вход</h2>
             {% csrf_token %}
+            {% if next %}
+                <input type="hidden" name="next" value="{{ next }}">
+            {% endif %}
             {{ login_form.as_p }}
             <br/>
             <!--<div class="form-group">-->

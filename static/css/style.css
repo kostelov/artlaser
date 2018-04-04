@@ -415,6 +415,10 @@ td input {
     width: 40px;
 }
 
+td i {
+    color: #585E64;
+}
+
 td a:hover {
     opacity: 0.6;
 }

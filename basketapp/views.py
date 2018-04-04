@@ -1,9 +1,10 @@
-from django.shortcuts import render, HttpResponseRedirect, get_object_or_404
+from django.shortcuts import render, HttpResponseRedirect, get_object_or_404, reverse
 from django.contrib.auth.decorators import login_required
 from mainapp.models import Product
 from basketapp.models import Basket
 
 
+@login_required
 def main_basket(requset):
     title = 'Корзина'
     basket, count_product, total = Basket.get_basket(requset)
@@ -16,7 +17,10 @@ def main_basket(requset):
     return render(requset, 'basketapp/basket.html', context)
 
 
+@login_required
 def product_add(request, pk):
+    if 'login' in request.META.get('HTTP_REFERER'):
+        return HttpResponseRedirect(reverse('products:product', args=[pk]))
     product = get_object_or_404(Product, pk=pk)
     basket_object = Basket.objects.filter(user=request.user, product=product).first()
     if basket_object:
@@ -29,7 +33,7 @@ def product_add(request, pk):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
-
+@login_required
 def product_del(request, pk):
     basket_item = get_object_or_404(Basket, pk=pk)
     basket_item.delete()
