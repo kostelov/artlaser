@@ -10,16 +10,28 @@ class Basket(models.Model):
     add_datetime = models.DateTimeField(verbose_name='время добавления', auto_now_add=True)
     total_price = models.DecimalField(verbose_name='стоимость', max_digits=8, decimal_places=2, default=0)
 
+    @property
+    def product_cost(self):
+        return self.product.price * self.quantity
+
+    @property
+    def total_quantity(self):
+        # items = Basket.objects.filter(user=self.user)
+        items = self.user.basket.all()
+        total_quantity = sum(list(map(lambda x: x.quantity, items)))
+        return total_quantity
+
+    @property
+    def total_cost(self):
+        # items = Basket.objects.filter(user=self.user)
+        items = self.user.basket.all()
+        totalcost = sum(list(map(lambda x: x.product_cost, items)))
+        return totalcost
+
     @staticmethod
     def get_basket(request):
-        count_product = 0
-        total = 0
         if request.user.is_authenticated:
             basket = request.user.basket.all()
-                # Basket.objects.filter(user=request.user)
-            for item in basket:
-                count_product += int(item.quantity)
-                total += item.total_price
         else:
             basket = []
-        return basket, count_product, total
+        return basket

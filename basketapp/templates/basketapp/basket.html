@@ -2,62 +2,63 @@
 {% load staticfiles %}
 
 {% block title %}
-    {{ block.super }} - {{ title }}
+{{ block.super }} - {{ title }}
 {% endblock%}
 
 
 {% block container %}
-    <div class="container clearfix">
-        <div class="hero-back">
-            {% include 'mainapp/includes/inc__main_menu.html' %}
-            <div class="h2">Ваши покупки</div>
+<div class="container clearfix">
+    <div class="hero-back">
+        {% include 'mainapp/includes/inc__main_menu.html' %}
+        <div class="h2">Ваши покупки</div>
+    </div>
+    <!-- ====== CONTENT ====== -->
+    <div class="content">
+        {#{ request.resolver_match }#}
+        {% if basket %}
+            {% include 'basketapp/includes/inc__basket_list.html' %}
+        <!--<table>-->
+            <!--<thead>-->
+            <!--<tr>-->
+                <!--<th scope="col">Товар</th>-->
+                <!--<th scope="col">Наименование</th>-->
+                <!--<th scope="col">Цена</th>-->
+                <!--<th scope="col">К-во</th>-->
+                <!--<th scope="col">Стоимость</th>-->
+            <!--</tr>-->
+            <!--</thead>-->
+            <!--<tbody>-->
+            <!--{% for item in basket %}-->
+            <!--<tr>-->
+                <!--<th scope="row"><img class="img_min" src="/media/{{ item.product.image }}" alt=""></th>-->
+                <!--<td>{{ item.product.name }}</td>-->
+                <!--<td class="td-price">{{ item.product.price }}</td>-->
+                <!--<td class="td-qty">-->
+                    <!--<input type="number" name="{{ item.pk }}" min="0" value="{{ item.quantity }}">-->
+                    <!--<a href="{% url 'basket:product_del' item.pk %}">-->
+                        <!--<i class="fa fa-trash fa-lg" aria-hidden="true"></i>-->
+                    <!--</a>-->
+                <!--</td>-->
+                <!--<td class="td-total">{{ item.total_price }}</td>-->
+            <!--</tr>-->
+            <!--{% endfor %}-->
+            <!--</tbody>-->
+            <!--<tfoot>-->
+            <!--<tr>-->
+                <!--<td colspan="4">Всего единиц товара</td>-->
+                <!--<td class="td-qty">{{ count_product }}</td>-->
+            <!--</tr>-->
+            <!--<tr>-->
+                <!--<td colspan="4">На общую сумму</td>-->
+                <!--<td class="td-total">{{ total }}</td>-->
+            <!--</tr>-->
+            <!--</tfoot>-->
+        <!--</table>-->
+        {% else %}
+        <div style="align: center; margin: 100px auto;">
+            <h2>Корзина пуста</h2>
         </div>
-        <!-- ====== CONTENT ====== -->
-        <div class="content">
-            {#{ request.resolver_match }#}
-            {% if basket %}
-                <table>
-                    <thead>
-                        <tr>
-                            <th scope="col">Товар</th>
-                            <th scope="col">Наименование</th>
-                            <th scope="col">Цена</th>
-                            <th scope="col">К-во</th>
-                            <th scope="col">Стоимость</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    {% for item in basket %}
-                        <tr>
-                            <th scope="row"><img class="img_min" src="/media/{{ item.product.image }}" alt=""></th>
-                            <td>{{ item.product.name }}</td>
-                            <td class="td-price">{{ item.product.price }}</td>
-                            <td class="td-qty">
-                                <input type="number" name="{{ item.pk }}" min="0" value="{{ item.quantity }}">
-                                <a href="{% url 'basket:product_del' item.pk %}">
-                                    <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
-                                </a>
-                            </td>
-                            <td class="td-total">{{ item.total_price }}</td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <td colspan="4">Всего единиц товара</td>
-                            <td class="td-qty">{{ count_product }}</td>
-                        </tr>
-                        <tr>
-                            <td colspan="4">На общую сумму</td>
-                            <td class="td-total">{{ total }}</td>
-                        </tr>
-                    </tfoot>
-                </table>
-            {% else %}
-                <div style="align: center; margin: 100px auto;">
-                    <h2>Корзина пуста</h2>
-                </div>
-            {% endif %}
-        </div>    <!-- ====== CONTENT END ====== -->
-    </div>     <!-- ====== CONTAINER END ====== -->
+        {% endif %}
+    </div>    <!-- ====== CONTENT END ====== -->
+</div>     <!-- ====== CONTAINER END ====== -->
 {% endblock%}

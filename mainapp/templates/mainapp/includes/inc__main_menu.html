@@ -30,7 +30,7 @@
                     class="{% if request.resolver_match.namespaces.0 == 'basket' %} click {% endif %}">
                         {% if basket %}
                             <i class="fa fa-shopping-cart fa-lg" aria-hidden="true"></i>
-                            ({{ count_product }})
+                            ({{ basket.0.total_quantity }})
                         {% else %}
                             <i class="fa fa-shopping-cart fa-lg" aria-hidden="true">()</i>
                         {% endif %}

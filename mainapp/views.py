@@ -22,14 +22,13 @@ def main(request):
     title = 'Главная'
     categories = ProductCategory.objects.all()
     products = Product.objects.all()
-    basket, count_product, total_price = Basket.get_basket(request)
+    basket = Basket.get_basket(request)
     hot_product = get_hot_product()
     same_products = get_same_product(hot_product)
     context = {
         'title': title,
         'categories': categories,
         'products': products[:4],
-        'count_product': count_product,
         'basket': basket,
         'same_products': same_products,
     }
@@ -39,7 +38,7 @@ def main(request):
 def products(request, pk=None):
     title = 'Каталог'
     products = []
-    basket, count_product, total_price = Basket.get_basket(request)
+    basket = Basket.get_basket(request)
     categories = get_categories()
 
     if pk:
@@ -53,7 +52,6 @@ def products(request, pk=None):
             'title': title,
             'categories': categories,
             'products': products,
-            'count_product': count_product,
             'basket': basket,
         }
         return render(request, 'mainapp/products.html', context)
@@ -65,7 +63,6 @@ def products(request, pk=None):
         'title': title,
         'categories': categories,
         'products': products,
-        'count_product': count_product,
         'basket': basket,
         'hot_product': hot_product,
         'same_products': same_products,
@@ -77,7 +74,7 @@ def products(request, pk=None):
 def product(request, pk):
     product = get_object_or_404(Product, pk=pk)
     categories = get_categories()
-    basket, count_product, total_price = Basket.get_basket(request)
+    basket = Basket.get_basket(request)
     same_products = get_same_product(product)
     title = product.name
 
@@ -86,7 +83,6 @@ def product(request, pk):
         'categories': categories,
         'hot_product': product,
         'basket': basket,
-        'count_product': count_product,
         'same_products': same_products,
         'hot': False,
     }
@@ -103,11 +99,10 @@ def contact(request):
         locations = json.load(file)
 
     title = 'Контакты'
-    basket, count_product, total_price = Basket.get_basket(request)
+    basket = Basket.get_basket(request)
     context = {
         'title': title,
         'locations': locations,
-        'count_product': count_product,
         'basket': basket,
     }
     return render(request, 'mainapp/contact.html', context)
