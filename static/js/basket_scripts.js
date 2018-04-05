@@ -1,5 +1,5 @@
-window.onload = function () {
-    $('table').on('click', 'input[type="number"]', function () {
+window.onload = function (event) {
+    $('table').on('click', 'input[type="number"]', function (event) {
         var t_href = event.target;
 
         $.ajax({
