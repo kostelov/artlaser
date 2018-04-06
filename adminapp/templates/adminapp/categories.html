@@ -1,0 +1,66 @@
+{% extends 'adminapp/base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+{{ block.super }} - {{ title }}
+{% endblock %}
+
+{% block container %}
+<!--<div class="container clr">-->
+<div class="container clearfix">
+    <div class="hero-back">
+        <!-- ====== MENU ====== -->
+        {% include 'adminapp/includes/inc__menu.html' %}
+        <!-- ====== MENU END ====== -->
+        <div class="h2">{{ title }}</div>
+    </div>
+
+    <!-- ====== CONTENT ====== -->
+    <div class="content">
+        <table>
+            <thead>
+            <tr>
+                <th scope="col">Категория</th>
+                <th scope="col">Описание</th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for object in objects %}
+            <tr>
+                <th scope="row">{{ object.name }}</th>
+                <td>{{ object.description }}</td>
+                <td class="td-total">
+                    <button class="btn-cat">
+                        <a href="{#% url 'admin:products' object.pk %#}">
+                            Состав
+                        </a>
+                    </button>
+                    <button class="btn-cat">
+                        <a href="{#% url 'admin:category_update' object.pk %#}">
+                            Изменить
+                        </a>
+                    </button>
+                    <button class="btn-cat">
+                        <a href="{#% url 'admin:category_del' object.pk %#}">
+                            Удалить
+                        </a>
+                    </button>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+            <tr>
+                <td colspan="3" class="td-total">
+                    <button class="btn-cat">
+                        <a href="{#% url 'admin:category_create' %#}">Добавить котегорию</a>
+                    </button>
+                </td>
+            </tr>
+            <tfoot>
+            </tfoot>
+        </table>
+    </div>    <!-- ====== CONTENT END ====== -->
+</div>
+<!--</div>  ====== CONTAINER END ====== -->
+{% endblock %}

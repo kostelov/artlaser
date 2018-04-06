@@ -1,0 +1,72 @@
+{% extends 'adminapp/base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+{{ block.super }} - {{ title }}
+{% endblock %}
+
+{% block container %}
+<!--<div class="container clr">-->
+<div class="container clearfix">
+    <div class="hero-back">
+        <!-- ====== MENU ====== -->
+        {% include 'adminapp/includes/inc__menu.html' %}
+        <!-- ====== MENU END ====== -->
+        <div class="h2">{{ title }}</div>
+    </div>
+
+    <!-- ====== CONTENT ====== -->
+    <div class="content">
+        <table>
+            <thead>
+            <tr>
+                <th scope="col">Данные о пользователе</th>
+                <th scope="col">Контактные данные</th>
+                <th scope="col">Аватар</th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for object in objects %}
+            <tr>
+                <td>
+                    <p>Логин: <span>{{ object.username }}</span></p>
+                    <p>Имя: <span>{{ object.first_name }}</span></p>
+                    <p>Фамилия: <span>{{ object.last_name }}</span></p>
+                </td>
+                <td>
+                    <p>e-mail: <span>{{ object.email }}</span></p>
+                    <p>phone: <span>{{ object.phone }}</span></p>
+                </td>
+                <td>
+                    <img class="img_min" src="/media/{{ object.avatar|default:'products_image/gravatar.png' }}" alt="">
+                </td>
+                <td class="td-total">
+                    <button class="btn-cat">
+                        <a href="{#% url 'admin:user_update' object.pk %#}">
+                            Изменить
+                        </a>
+                    </button>
+                    <button class="btn-cat">
+                        <a href="{#% url 'admin:user_del' object.pk %#}">
+                            Удалить
+                        </a>
+                    </button>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+            <tr>
+                <td colspan="4" class="td-total">
+                    <button class="btn-cat">
+                        <a href="{#% url 'admin:user_create' %#}">Добавить пользователя</a>
+                    </button>
+                </td>
+            </tr>
+            <tfoot>
+            </tfoot>
+        </table>
+    </div>    <!-- ====== CONTENT END ====== -->
+</div>
+<!--</div>  ====== CONTAINER END ====== -->
+{% endblock %}

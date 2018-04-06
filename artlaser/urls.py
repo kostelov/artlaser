@@ -15,10 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import re_path, include
-import mainapp.views as mainapp
-
 from django.conf import settings
 from django.conf.urls.static import static
+
+import mainapp.views as mainapp
+
 
 urlpatterns = [
     re_path(r'^$', mainapp.main, name='main'),
@@ -27,6 +28,8 @@ urlpatterns = [
     # re_path(r'^products/', mainapp.products, name='products'),
     re_path(r'^contact/', mainapp.contact, name='contact'),
     re_path(r'^basket/', include('basketapp.urls', namespace='basket')),
+    re_path(r'^administrator/', include('adminapp.urls', namespace='admin')),
+
     re_path(r'^admin/', admin.site.urls),
 ]
 
