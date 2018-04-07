@@ -30,37 +30,46 @@
             {% for object in objects %}
             <tr>
                 <td>
+                    <p class="{% if object.is_superuser %}u-red{% else %}u-green{% endif %}">
+                        {% if object.is_superuser %}
+                        администратор
+                        {% else %}
+                        пользователь
+                        {% endif %}</p>
                     <p>Логин: <span>{{ object.username }}</span></p>
                     <p>Имя: <span>{{ object.first_name }}</span></p>
                     <p>Фамилия: <span>{{ object.last_name }}</span></p>
+                    <p>Последний вход: <span>{{ object.last_login }}</span></p>
                 </td>
                 <td>
                     <p>e-mail: <span>{{ object.email }}</span></p>
-                    <p>phone: <span>{{ object.phone }}</span></p>
+                    <p>тел.: <span>{{ object.phone }}</span></p>
                 </td>
-                <td>
-                    <img class="img_min" src="/media/{{ object.avatar|default:'products_image/gravatar.png' }}" alt="">
+                <td class="td-image">
+                    <img class="img_min" src="/media/{{ object.avatar|default:'users_avatars/gravatar.png' }}" alt="">
                 </td>
                 <td class="td-total">
-                    <button class="btn-cat">
-                        <a href="{#% url 'admin:user_update' object.pk %#}">
+                    <a href="{% url 'admin:user_update' object.pk %}">
+                        <button class="btn-cat">
                             Изменить
-                        </a>
-                    </button>
-                    <button class="btn-cat">
-                        <a href="{#% url 'admin:user_del' object.pk %#}">
+                        </button>
+                    </a>
+                    {% if object.username != 'django' %}
+                    <a href="{#% url 'admin:user_del' object.pk %#}">
+                        <button class="btn-cat">
                             Удалить
-                        </a>
-                    </button>
+                        </button>
+                    </a>
+                    {% endif %}
                 </td>
             </tr>
             {% endfor %}
             </tbody>
             <tr>
                 <td colspan="4" class="td-total">
-                    <button class="btn-cat">
-                        <a href="{#% url 'admin:user_create' %#}">Добавить пользователя</a>
-                    </button>
+                    <a href="{% url 'admin:user_create' %}">
+                        <button class="btn-cat">Добавить пользователя</button>
+                    </a>
                 </td>
             </tr>
             <tfoot>

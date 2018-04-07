@@ -412,10 +412,19 @@ nav a:hover {
     flex-wrap: wrap; 
 }
 
+.u-red {
+    color: red;
+}
+
+.u-green {
+    color: green;
+}
+
 table {
     border-collapse: collapse;
     width: 90%;
     margin: auto;
+    line-height: 1.5;
 }
 
 thead {
