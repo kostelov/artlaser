@@ -38,3 +38,16 @@ def users(request):
     }
 
     return render(request, 'adminapp/users.html', context)
+
+
+def products(request, pk):
+    title = 'Товары'
+
+    products_list = Product.objects.filter(category__pk=pk).order_by('name')
+
+    context = {
+        'title': title,
+        'objects': products_list,
+    }
+
+    return render(request, 'adminapp/products_list.html', context)

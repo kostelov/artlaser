@@ -149,6 +149,7 @@ header {
 }
 
 .btn-cat {
+    margin: 5px;
     padding: 5px;
     border-radius: 5px;
     background: #f0f0f2;
@@ -413,7 +414,7 @@ nav a:hover {
 
 table {
     border-collapse: collapse;
-    width: 75%;
+    width: 90%;
     margin: auto;
 }
 
@@ -444,11 +445,11 @@ td span {
     font-weight: bold;
 }
 
-td a:hover {
+/*td a:hover {
     opacity: 0.6;
-}
+}*/
 
-.td-price, .td-qty, .td-total {
+.td-price, .td-qty, .td-total, .td-image {
     text-align: center;
 }
 

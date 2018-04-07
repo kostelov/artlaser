@@ -20,8 +20,13 @@
         <table>
             <thead>
             <tr>
-                <th scope="col">Категория</th>
-                <th scope="col">Описание</th>
+                <th colspan="5" scope="col">Категория "{{ objects.0.category.name }}"</th>
+            </tr>
+            <tr>
+                <th scope="col">Товар</th>
+                <th scope="col">Краткое описание</th>
+                <th scope="col">Изображение</th>
+                <th scope="col">Цена за ед.</th>
                 <th scope="col"></th>
             </tr>
             </thead>
@@ -29,20 +34,19 @@
             {% for object in objects %}
             <tr>
                 <th scope="row">{{ object.name }}</th>
-                <td>{{ object.description }}</td>
+                <td>{{ object.short_descript }}</td>
+                <td class="td-image">
+                    <img class="img_min" src="/media/{{ object.image|default:'products_image/no_image.png' }}" alt="">
+                </td>
+                <td class="td-price">{{ object.price }}</td>
                 <td class="td-total">
-                    <a href="{% url 'admin:products' object.pk %}">
-                        <button class="btn-cat">
-                                Состав
-                        </button>
-                    </a>
                     <button class="btn-cat">
-                        <a href="{#% url 'admin:category_update' object.pk %#}">
+                        <a href="{#% url 'admin:product_update' object.pk %#}">
                             Изменить
                         </a>
                     </button>
                     <button class="btn-cat">
-                        <a href="{#% url 'admin:category_del' object.pk %#}">
+                        <a href="{#% url 'admin:product_del' object.pk %#}">
                             Удалить
                         </a>
                     </button>
@@ -51,9 +55,9 @@
             {% endfor %}
             </tbody>
             <tr>
-                <td colspan="3" class="td-total">
+                <td colspan="5" class="td-total">
                     <button class="btn-cat">
-                        <a href="{#% url 'admin:category_create' %#}">Добавить котегорию</a>
+                        <a href="{#% url 'admin:product_create' %#}">Добавить товар</a>
                     </button>
                 </td>
             </tr>
