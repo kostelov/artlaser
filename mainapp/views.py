@@ -14,13 +14,13 @@ def get_categories():
     }
 
     categories.append(all_categories)
-    categories.extend(ProductCategory.objects.all())
+    categories.extend(ProductCategory.objects.filter(is_active=True))
 
     return categories
 
 def main(request):
     title = 'Главная'
-    categories = ProductCategory.objects.all()
+    categories = ProductCategory.objects.filter(is_active=True)
     products = Product.objects.all()
     basket = Basket.get_basket(request)
     hot_product = get_hot_product()
@@ -44,7 +44,7 @@ def products(request, pk=None):
     if pk:
         pk = int(pk)
         if pk == 0:
-            products = Product.objects.all()
+            products = Product.objects.filter(category__is_active=True)
         else:
             products = Product.objects.filter(category__pk=pk)
 
@@ -109,7 +109,7 @@ def contact(request):
 
 
 def get_hot_product():
-    products = Product.objects.all()
+    products = Product.objects.filter(category__is_active=True)
     return random.sample(list(products), 1)[0]
 
 

@@ -6,7 +6,10 @@ app_name = 'adminapp'
 urlpatterns = [
     re_path(r'^$', adminapp.categories, name='categories'),
     re_path(r'^categories/$', adminapp.categories, name='categories'),
-    re_path(r'^categories/create/$', adminapp.category_create, name='category'),
+    re_path(r'^categories/create/$', adminapp.category_create, name='category_create'),
+    re_path(r'^category/update/(?P<pk>\d+)/$', adminapp.category_update, name='category_update'),
+    re_path(r'^category/delete/(?P<pk>\d+)/$', adminapp.category_del, name='category_del'),
+    re_path(r'^category/activate/(?P<pk>\d+)/$', adminapp.category_activate, name='category_activate'),
 
     re_path(r'^products/category/(?P<pk>\d+)/$', adminapp.products, name='products'),
 

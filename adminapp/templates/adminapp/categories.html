@@ -22,40 +22,53 @@
             <tr>
                 <th scope="col">Категория</th>
                 <th scope="col">Описание</th>
+                <th scope="col">Активна</th>
                 <th scope="col"></th>
             </tr>
             </thead>
             <tbody>
             {% for object in objects %}
             <tr>
-                <th scope="row">{{ object.name }}</th>
+                <th scope="row"><a href="{% url 'administrator:products' object.pk %}">{{ object.name }}</a></th>
                 <td>{{ object.description }}</td>
                 <td class="td-total">
-                    <a href="{% url 'administrator:products' object.pk %}">
+                    {% if object.is_active %}
+                    <i class="fa fa-check fa-2x" aria-hidden="true"></i>
+                    {% else %}
+                    <i class="fa fa-times fa-2x" aria-hidden="true"></i>
+                    {% endif %}
+                </td>
+                <td class="td-total">
+                    <a href="{% url 'administrator:category_update' object.pk %}">
                         <button class="btn-cat">
-                                Состав
+                            Изменить
                         </button>
                     </a>
-                    <button class="btn-cat">
-                        <a href="{#% url 'administrator:category_update' object.pk %#}">
-                            Изменить
-                        </a>
-                    </button>
-                    <button class="btn-cat">
-                        <a href="{#% url 'administrator:category_del' object.pk %#}">
-                            Удалить
-                        </a>
-                    </button>
+                    {% if object.is_active %}
+                    <a href="{% url 'administrator:category_del' object.pk %}">
+                        <button class="btn-cat">
+                            Отключить
+                        </button>
+                    </a>
+                    {% else %}
+                    <a href="{% url 'administrator:category_activate' object.pk %}">
+                        <button class="btn-cat">
+                            Включить
+                        </button>
+                    </a>
+                    {% endif %}
                 </td>
             </tr>
             {% endfor %}
             </tbody>
             <tr>
-                <td colspan="3" class="td-total">
-                    <button class="btn-cat">
-                        <a href="{#% url 'administrator:category_create' %#}">Добавить котегорию</a>
-                    </button>
-                </td>
+                <td colspan="4" class="td-total">
+                    <a href="{% url 'administrator:category_create' %}">
+                        <button class="btn-cat">
+                            Добавить котегорию
+                        </button>
+                    </a>
+                 </td>
             </tr>
             <tfoot>
             </tfoot>

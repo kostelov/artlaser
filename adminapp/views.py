@@ -1,9 +1,8 @@
 from django.shortcuts import render, HttpResponseRedirect, get_object_or_404
 from django.urls import reverse
-# from django.contrib import auth
 from django.contrib.auth.decorators import user_passes_test
 
-from adminapp.forms import ShopUserAdminEditForm
+from adminapp.forms import ShopUserAdminEditForm, ProductCategoryEditForm
 from authapp.models import ShopUser
 from authapp.forms import ShopUserRegisterForm
 from mainapp.models import ProductCategory, Product
@@ -13,7 +12,7 @@ from mainapp.models import ProductCategory, Product
 def categories(request):
     title = 'Категории'
 
-    categories_list = ProductCategory.objects.all()
+    categories_list = ProductCategory.objects.all().order_by('-is_active', 'name')
 
     context = {
         'title': title,
@@ -24,18 +23,70 @@ def categories(request):
 
 
 @user_passes_test(lambda user: user.is_superuser)
-def category_update(request):
-    pass
-
-
-@user_passes_test(lambda user: user.is_superuser)
-def category_del(request):
-    pass
-
-
-@user_passes_test(lambda user: user.is_superuser)
 def category_create(request):
-    pass
+    title = 'Новая категория'
+    form = ProductCategoryEditForm()
+    if request.method == 'POST':
+        form = ProductCategoryEditForm(request.POST)
+        # Получаем данные и проверяем есть ли они в request
+        if form.is_valid():
+            try:
+                form.save()
+                # После сохранения данных возвращаемся к списку пользователей
+                return HttpResponseRedirect(reverse('administrator:categories'))
+            except ValueError:
+                pass
+
+    context = {
+        'title': title,
+        'form': form,
+    }
+    return render(request, 'adminapp/category_edit.html', context)
+
+
+@user_passes_test(lambda user: user.is_superuser)
+def category_update(request, pk):
+    title = 'Редактирование категории'
+
+    object = get_object_or_404(ProductCategory, pk=int(pk))
+    form = ProductCategoryEditForm(instance=object)
+    if request.method == 'POST':
+        form = ProductCategoryEditForm(request.POST, instance=object)
+        # Получаем данные и проверяем есть ли они в request
+        if form.is_valid():
+            try:
+                form.save()
+                # После сохранения данных возвращаемся к списку пользователей
+                return HttpResponseRedirect(reverse('administrator:categories'))
+            except ValueError:
+                pass
+        else:
+            form = ProductCategoryEditForm(instance=object)
+
+    context = {
+        'title': title,
+        'form': form,
+    }
+    return render(request, 'adminapp/category_edit.html', context)
+
+
+@user_passes_test(lambda user: user.is_superuser)
+def category_del(request, pk):
+    object = get_object_or_404(ProductCategory, pk=int(pk))
+    if object:
+        # user.delete()
+        object.is_active = False
+        object.save()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+def category_activate(request, pk):
+    object = get_object_or_404(ProductCategory, pk=int(pk))
+    if object:
+        # user.delete()
+        object.is_active = True
+        object.save()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 @user_passes_test(lambda user: user.is_superuser)
