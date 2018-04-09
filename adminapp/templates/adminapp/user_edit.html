@@ -10,7 +10,7 @@
         <form method="post" enctype="multipart/form-data">
             <h2 class="text-center">{{ title }}</h2>
             {% csrf_token %}
-            {{ form.as_p }}
+            {{ form.as_p}}
             <div class="user_avatar"><img src="/media/{{ object.avatar|default:'users_avatars/gravatar.png' }}"></div>
             <br>
             <input class="form-control btn btn-primary btn-block" type="submit" value="Cохранить">

@@ -1,12 +1,15 @@
 from django.shortcuts import render, HttpResponseRedirect, get_object_or_404
 from django.urls import reverse
-from django.contrib import auth
+# from django.contrib import auth
+from django.contrib.auth.decorators import user_passes_test
+
 from adminapp.forms import ShopUserAdminEditForm
 from authapp.models import ShopUser
-from mainapp.models import ProductCategory, Product
 from authapp.forms import ShopUserRegisterForm
+from mainapp.models import ProductCategory, Product
 
 
+@user_passes_test(lambda user: user.is_superuser)
 def categories(request):
     title = 'Категории'
 
@@ -20,18 +23,22 @@ def categories(request):
     return render(request, 'adminapp/categories.html', context)
 
 
+@user_passes_test(lambda user: user.is_superuser)
 def category_update(request):
     pass
 
 
+@user_passes_test(lambda user: user.is_superuser)
 def category_del(request):
     pass
 
 
+@user_passes_test(lambda user: user.is_superuser)
 def category_create(request):
     pass
 
 
+@user_passes_test(lambda user: user.is_superuser)
 def users(request):
     title = 'Пользователи'
     users_list = ShopUser.objects.all().order_by('-is_active', 'username')
@@ -44,6 +51,7 @@ def users(request):
     return render(request, 'adminapp/users.html', context)
 
 
+@user_passes_test(lambda user: user.is_superuser)
 def user_create(request):
     title = 'Регистрация пользователя'
     form = ShopUserRegisterForm()
@@ -65,6 +73,7 @@ def user_create(request):
     return render(request, 'adminapp/user_edit.html', context)
 
 
+@user_passes_test(lambda user: user.is_superuser)
 def user_update(request, pk):
     title = 'Редактирование профиля'
     user = get_object_or_404(ShopUser, pk=int(pk))
@@ -85,6 +94,7 @@ def user_update(request, pk):
         return render(request, 'adminapp/user_edit.html', context)
 
 
+@user_passes_test(lambda user: user.is_superuser)
 def user_del(request, pk):
     user = get_object_or_404(ShopUser, pk=int(pk))
     if user:
@@ -103,6 +113,7 @@ def user_activate(request, pk):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
+@user_passes_test(lambda user: user.is_superuser)
 def products(request, pk):
     title = 'Товары'
 

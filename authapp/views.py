@@ -22,6 +22,7 @@ def login(request):
                 # Авторизируем пользоваетля, помещаем его в request
                 auth.login(request, user)
                 if 'next' in request.POST.keys():
+                    # Направляем пользователя на страницу с которой пришел
                     return HttpResponseRedirect(request.POST['next'])
                 else:
                     return HttpResponseRedirect(reverse('main'))
