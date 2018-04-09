@@ -2,7 +2,7 @@ from django.shortcuts import render, HttpResponseRedirect, get_object_or_404
 from django.urls import reverse
 from django.contrib.auth.decorators import user_passes_test
 
-from adminapp.forms import ShopUserAdminEditForm, ProductCategoryEditForm
+from adminapp.forms import ShopUserAdminEditForm, ProductCategoryEditForm, ProductEditForm
 from authapp.models import ShopUser
 from authapp.forms import ShopUserRegisterForm
 from mainapp.models import ProductCategory, Product
@@ -74,16 +74,15 @@ def category_update(request, pk):
 def category_del(request, pk):
     object = get_object_or_404(ProductCategory, pk=int(pk))
     if object:
-        # user.delete()
         object.is_active = False
         object.save()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
+@user_passes_test(lambda user: user.is_superuser)
 def category_activate(request, pk):
     object = get_object_or_404(ProductCategory, pk=int(pk))
     if object:
-        # user.delete()
         object.is_active = True
         object.save()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
@@ -155,6 +154,7 @@ def user_del(request, pk):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
+@user_passes_test(lambda user: user.is_superuser)
 def user_activate(request, pk):
     user = get_object_or_404(ShopUser, pk=int(pk))
     if user:
@@ -176,3 +176,31 @@ def products(request, pk):
     }
 
     return render(request, 'adminapp/products_list.html', context)
+
+
+@user_passes_test(lambda user: user.is_superuser)
+def product_create(request):
+    pass
+
+
+@user_passes_test(lambda user: user.is_superuser)
+def product_update(request):
+    pass
+
+
+@user_passes_test(lambda user: user.is_superuser)
+def product_del(request, pk):
+    object = get_object_or_404(Product, pk=int(pk))
+    if object:
+        object.is_active = False
+        object.save()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+@user_passes_test(lambda user: user.is_superuser)
+def product_activate(request, pk):
+    object = get_object_or_404(Product, pk=int(pk))
+    if object:
+        object.is_active = True
+        object.save()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))

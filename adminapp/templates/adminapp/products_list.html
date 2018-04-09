@@ -45,11 +45,19 @@
                             Изменить
                         </a>
                     </button>
-                    <button class="btn-cat">
-                        <a href="{#% url 'administrator:product_del' object.pk %#}">
-                            Удалить
-                        </a>
-                    </button>
+                    {% if object.is_active %}
+                    <a href="{% url 'administrator:product_del' object.pk %}">
+                        <button class="btn-cat">
+                            Отключить
+                        </button>
+                    </a>
+                    {% else %}
+                    <a href="{% url 'administrator:product_activate' object.pk %}">
+                        <button class="btn-cat">
+                            Включить
+                        </button>
+                    </a>
+                    {% endif %}
                 </td>
             </tr>
             {% endfor %}

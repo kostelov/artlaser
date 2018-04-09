@@ -21,7 +21,7 @@ def get_categories():
 def main(request):
     title = 'Главная'
     categories = ProductCategory.objects.filter(is_active=True)
-    products = Product.objects.all()
+    products = Product.objects.filter(is_active=True, category__is_active=True)
     basket = Basket.get_basket(request)
     hot_product = get_hot_product()
     same_products = get_same_product(hot_product)
@@ -44,9 +44,9 @@ def products(request, pk=None):
     if pk:
         pk = int(pk)
         if pk == 0:
-            products = Product.objects.filter(category__is_active=True)
+            products = Product.objects.filter(category__is_active=True, is_active=True)
         else:
-            products = Product.objects.filter(category__pk=pk)
+            products = Product.objects.filter(category__pk=pk, is_active=True)
 
         context = {
             'title': title,
@@ -114,5 +114,5 @@ def get_hot_product():
 
 
 def get_same_product(hot_product):
-    same_products = Product.objects.filter(category=hot_product.category).exclude(pk=hot_product.pk)[:4]
+    same_products = Product.objects.filter(is_active=True, category=hot_product.category).exclude(pk=hot_product.pk)[:4]
     return same_products
