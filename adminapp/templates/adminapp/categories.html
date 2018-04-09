@@ -31,18 +31,18 @@
                 <th scope="row">{{ object.name }}</th>
                 <td>{{ object.description }}</td>
                 <td class="td-total">
-                    <a href="{% url 'admin:products' object.pk %}">
+                    <a href="{% url 'administrator:products' object.pk %}">
                         <button class="btn-cat">
                                 Состав
                         </button>
                     </a>
                     <button class="btn-cat">
-                        <a href="{#% url 'admin:category_update' object.pk %#}">
+                        <a href="{#% url 'administrator:category_update' object.pk %#}">
                             Изменить
                         </a>
                     </button>
                     <button class="btn-cat">
-                        <a href="{#% url 'admin:category_del' object.pk %#}">
+                        <a href="{#% url 'administrator:category_del' object.pk %#}">
                             Удалить
                         </a>
                     </button>
@@ -53,7 +53,7 @@
             <tr>
                 <td colspan="3" class="td-total">
                     <button class="btn-cat">
-                        <a href="{#% url 'admin:category_create' %#}">Добавить котегорию</a>
+                        <a href="{#% url 'administrator:category_create' %#}">Добавить котегорию</a>
                     </button>
                 </td>
             </tr>

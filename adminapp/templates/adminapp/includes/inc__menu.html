@@ -12,13 +12,13 @@
             </a>
         </li>
         <li>
-            <a href="{% url 'admin:users' %}"
+            <a href="{% url 'administrator:users' %}"
                class="{% if request.resolver_match.url_name == 'users' %} click {% endif %}">
                 ПОЛЬЗОВАТЕЛИ
             </a>
         </li>
         <li>
-            <a href="{% url 'admin:categories' %}"
+            <a href="{% url 'administrator:categories' %}"
                class="{% if request.resolver_match.url_name == 'categories' %} click {% endif %}">
                 КАТЕГОРИИ
             </a>

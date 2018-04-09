@@ -26,13 +26,15 @@
         <li>
             {% if user.is_authenticated %}
                 <a href="{% url 'auth:edit' %}">{{user.username}}</a>
+                {% if user.is_superuser %}
+                <a href="{% url 'administrator:categories' %}">админка</a>{% endif %}
                 <a href="{% url 'basket:main_basket' %}"
                     class="{% if request.resolver_match.namespaces.0 == 'basket' %} click {% endif %}">
                         {% if basket %}
                             <i class="fa fa-shopping-cart fa-lg" aria-hidden="true"></i>
                             ({{ basket.0.total_quantity }})
                         {% else %}
-                            <i class="fa fa-shopping-cart fa-lg" aria-hidden="true">()</i>
+                            <i class="fa fa-shopping-cart fa-lg" aria-hidden="true"></i>
                         {% endif %}
                 </a>
             {% endif %}

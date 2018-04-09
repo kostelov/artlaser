@@ -41,12 +41,12 @@
                 <td class="td-price">{{ object.price }}</td>
                 <td class="td-total">
                     <button class="btn-cat">
-                        <a href="{#% url 'admin:product_update' object.pk %#}">
+                        <a href="{#% url 'administrator:product_update' object.pk %#}">
                             Изменить
                         </a>
                     </button>
                     <button class="btn-cat">
-                        <a href="{#% url 'admin:product_del' object.pk %#}">
+                        <a href="{#% url 'administrator:product_del' object.pk %#}">
                             Удалить
                         </a>
                     </button>
@@ -57,7 +57,7 @@
             <tr>
                 <td colspan="5" class="td-total">
                     <button class="btn-cat">
-                        <a href="{#% url 'admin:product_create' %#}">Добавить товар</a>
+                        <a href="{#% url 'administrator:product_create' %#}">Добавить товар</a>
                     </button>
                 </td>
             </tr>

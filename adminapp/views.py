@@ -1,9 +1,10 @@
 from django.shortcuts import render, HttpResponseRedirect, get_object_or_404
 from django.urls import reverse
 from django.contrib import auth
+from adminapp.forms import ShopUserAdminEditForm
 from authapp.models import ShopUser
 from mainapp.models import ProductCategory, Product
-from authapp.forms import ShopUserRegisterForm, ShopUserEditForm
+from authapp.forms import ShopUserRegisterForm
 
 
 def categories(request):
@@ -52,10 +53,8 @@ def user_create(request):
         if form.is_valid():
             try:
                 form.save()
-                # После сохранения данных авторизируем пользователя и направляем на главную страницу
-                user = auth.authenticate(request, username=request.POST['username'], password=request.POST['password1'])
-                auth.login(request, user)
-                return HttpResponseRedirect(reverse('admin:users'))
+                # После сохранения данных возвращаемся к списку пользователей
+                return HttpResponseRedirect(reverse('administrator:users'))
             except ValueError:
                 pass
 
@@ -71,19 +70,37 @@ def user_update(request, pk):
     user = get_object_or_404(ShopUser, pk=int(pk))
     if user:
         if request.method == 'POST':
-            form = ShopUserEditForm(request.POST, request.FILES, instance=user)
+            form = ShopUserAdminEditForm(request.POST, request.FILES, instance=user)
             # Получаем данные и проверяем есть ли они в request
             if form.is_valid():
                 form.save()
-                return HttpResponseRedirect(reverse('admin:users'))
+                return HttpResponseRedirect(reverse('administrator:users'))
         else:
-            form = ShopUserEditForm(instance=user)
+            form = ShopUserAdminEditForm(instance=user)
 
         context = {
             'title': title,
             'form': form,
         }
         return render(request, 'adminapp/user_edit.html', context)
+
+
+def user_del(request, pk):
+    user = get_object_or_404(ShopUser, pk=int(pk))
+    if user:
+        # user.delete()
+        user.is_active = False
+        user.save()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+def user_activate(request, pk):
+    user = get_object_or_404(ShopUser, pk=int(pk))
+    if user:
+        # user.delete()
+        user.is_active = True
+        user.save()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 def products(request, pk):

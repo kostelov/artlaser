@@ -23,6 +23,7 @@
                 <th scope="col">Данные о пользователе</th>
                 <th scope="col">Контактные данные</th>
                 <th scope="col">Аватар</th>
+                <th scope="col">Активен</th>
                 <th scope="col"></th>
             </tr>
             </thead>
@@ -49,25 +50,40 @@
                     <img class="img_min" src="/media/{{ object.avatar|default:'users_avatars/gravatar.png' }}" alt="">
                 </td>
                 <td class="td-total">
-                    <a href="{% url 'admin:user_update' object.pk %}">
+                    {% if object.is_active %}
+                        <i class="fa fa-check fa-2x" aria-hidden="true"></i>
+                    {% else %}
+                        <i class="fa fa-times fa-2x" aria-hidden="true"></i>
+                    {% endif %}
+                </td>
+                <td class="td-total">
+                    <a href="{% url 'administrator:user_update' object.pk %}">
                         <button class="btn-cat">
                             Изменить
                         </button>
                     </a>
                     {% if object.username != 'django' %}
-                    <a href="{#% url 'admin:user_del' object.pk %#}">
-                        <button class="btn-cat">
-                            Удалить
-                        </button>
-                    </a>
+                    {% if object.is_active %}
+                        <a href="{% url 'administrator:user_del' object.pk %}">
+                            <button class="btn-cat">
+                                Отключить
+                            </button>
+                        </a>
+                        {% else %}
+                        <a href="{% url 'administrator:user_activate' object.pk %}">
+                            <button class="btn-cat">
+                                Включить
+                            </button>
+                        </a>
+                        {% endif %}
                     {% endif %}
                 </td>
             </tr>
             {% endfor %}
             </tbody>
             <tr>
-                <td colspan="4" class="td-total">
-                    <a href="{% url 'admin:user_create' %}">
+                <td colspan="5" class="td-total">
+                    <a href="{% url 'administrator:user_create' %}">
                         <button class="btn-cat">Добавить пользователя</button>
                     </a>
                 </td>
