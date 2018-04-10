@@ -11,11 +11,11 @@ urlpatterns = [
     re_path(r'^category/delete/(?P<pk>\d+)/$', adminapp.category_del, name='category_del'),
     re_path(r'^category/activate/(?P<pk>\d+)/$', adminapp.category_activate, name='category_activate'),
 
-    re_path(r'^products/category/(?P<pk>\d+)/$', adminapp.products, name='products'),
-    re_path(r'^products/create/category/(?P<pk>\d+)/$', adminapp.product_create, name='product_create'),
-    re_path(r'^products/update/category/(?P<pk>\d+)/$', adminapp.product_update, name='product_update'),
-    re_path(r'^products/delete/category/(?P<pk>\d+)/$', adminapp.product_del, name='product_del'),
-    re_path(r'^products/activate/category/(?P<pk>\d+)/$', adminapp.product_activate, name='product_activate'),
+    re_path(r'^products/(?P<category_pk>\d+)/$', adminapp.products, name='products'),
+    re_path(r'^product/create/(?P<category_pk>\d+)/$', adminapp.product_create, name='product_create'),
+    re_path(r'^product/update/(?P<product_pk>\d+)/$', adminapp.product_update, name='product_update'),
+    re_path(r'^product/delete/(?P<pk>\d+)/$', adminapp.product_del, name='product_del'),
+    re_path(r'^product/activate/(?P<pk>\d+)/$', adminapp.product_activate, name='product_activate'),
 
     re_path(r'^users/$', adminapp.users, name='users'),
     re_path(r'^users/create/$', adminapp.user_create, name='user_create'),

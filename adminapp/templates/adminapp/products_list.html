@@ -26,13 +26,13 @@
                 <th scope="col">Товар</th>
                 <th scope="col">Краткое описание</th>
                 <th scope="col">Изображение</th>
-                <th scope="col">Цена за ед.</th>
+                <th scope="col">Цена</th>
                 <th scope="col"></th>
             </tr>
             </thead>
             <tbody>
             {% for object in objects %}
-            <tr>
+            <tr style="{% if not object.is_active%}opacity:0.3{% endif %}">
                 <th scope="row">{{ object.name }}</th>
                 <td>{{ object.short_descript }}</td>
                 <td class="td-image">
@@ -40,11 +40,11 @@
                 </td>
                 <td class="td-price">{{ object.price }}</td>
                 <td class="td-total">
-                    <button class="btn-cat">
-                        <a href="{#% url 'administrator:product_update' object.pk %#}">
+                    <a href="{% url 'administrator:product_update' object.pk %}">
+                        <button class="btn-cat">
                             Изменить
-                        </a>
-                    </button>
+                        </button>
+                    </a>
                     {% if object.is_active %}
                     <a href="{% url 'administrator:product_del' object.pk %}">
                         <button class="btn-cat">
@@ -64,9 +64,11 @@
             </tbody>
             <tr>
                 <td colspan="5" class="td-total">
-                    <button class="btn-cat">
-                        <a href="{#% url 'administrator:product_create' %#}">Добавить товар</a>
-                    </button>
+                    <a href="{% url 'administrator:product_create' category.pk %}">
+                        <button class="btn-cat">
+                            Добавить товар
+                        </button>
+                    </a>
                     <a href="{% url 'administrator:categories' %}">
                         <button class="btn-cat">
                             Назад

@@ -165,27 +165,64 @@ def user_activate(request, pk):
 
 
 @user_passes_test(lambda user: user.is_superuser)
-def products(request, pk):
+def products(request, category_pk):
     title = 'Товары'
 
-    products_list = Product.objects.filter(category__pk=pk).order_by('name')
+    products_list = Product.objects.filter(category__pk=category_pk).order_by('name')
+    # Получим текущую категорию и передадим в шаблон, чтобы не было ошибки, если категория пустая
+    category = get_object_or_404(ProductCategory, pk=int(category_pk))
 
     context = {
         'title': title,
         'objects': products_list,
+        'category': category,
     }
 
     return render(request, 'adminapp/products_list.html', context)
 
 
 @user_passes_test(lambda user: user.is_superuser)
-def product_create(request):
-    pass
+def product_create(request, category_pk):
+    title = 'Добавить товар'
+    category = get_object_or_404(ProductCategory, pk=int(category_pk))
+    if request.method == 'POST':
+        form = ProductEditForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('administrator:products', kwargs={'category_pk': category_pk}))
+    else:
+        form = ProductEditForm(initial={'category': category})
+
+    context = {
+        'title': title,
+        'category': category,
+        'form': form,
+    }
+
+    return render(request, 'adminapp/product_edit.html', context)
+
 
 
 @user_passes_test(lambda user: user.is_superuser)
-def product_update(request):
-    pass
+def product_update(request, product_pk):
+    title = 'Изменить товар'
+    product = get_object_or_404(Product, pk=int(product_pk))
+    category = product.category
+    if request.method == 'POST':
+        form = ProductEditForm(request.POST, request.FILES, instance=product)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('administrator:products', kwargs={'category_pk': category.pk}))
+    else:
+        form = ProductEditForm(instance=product)
+
+    context = {
+        'title': title,
+        'category': category,
+        'form': form,
+    }
+
+    return render(request, 'adminapp/product_edit.html', context)
 
 
 @user_passes_test(lambda user: user.is_superuser)

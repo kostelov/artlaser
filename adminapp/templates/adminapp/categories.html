@@ -29,7 +29,7 @@
             <tbody>
             {% for object in objects %}
             <tr>
-                <th scope="row"><a href="{% url 'administrator:products' object.pk %}">{{ object.name }}</a></th>
+                <th scope="row" ><a href="{% url 'administrator:products' object.pk %}">{{ object.name }}</a></th>
                 <td>{{ object.description }}</td>
                 <td class="td-total">
                     {% if object.is_active %}
