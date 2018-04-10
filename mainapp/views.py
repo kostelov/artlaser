@@ -28,7 +28,7 @@ def main(request):
     context = {
         'title': title,
         'categories': categories,
-        'products': products[:4],
+        'products': products[1:5],
         'basket': basket,
         'same_products': same_products,
     }

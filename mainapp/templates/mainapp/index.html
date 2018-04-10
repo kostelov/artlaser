@@ -29,7 +29,7 @@
             <a class="explore" href="#">показать все<img src="{% static '/img/arrow.png' %}" alt=""></a>
         </div>
         <div class="preview">
-            {% for product in same_products %}
+            {% for product in products %}
             <a class="block_pic" href="#"><img src="/media/{{product.image|default:'products_image/no_image.png'}}" alt="prod">
                 <div class="txt">
                     <div class="b_c"><img src="{% static '/img/arrow.png' %}" alt="arrow"></div>
