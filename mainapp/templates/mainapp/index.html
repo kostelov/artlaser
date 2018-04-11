@@ -1,5 +1,6 @@
 {% extends 'mainapp/base.html' %}
 {% load staticfiles %}
+{% load tags %}
 
 {% block title %}
     {{ block.super }} - {{ title }}
@@ -30,7 +31,8 @@
         </div>
         <div class="preview">
             {% for product in products %}
-            <a class="block_pic" href="#"><img src="/media/{{product.image|default:'products_image/no_image.png'}}" alt="prod">
+            <a class="block_pic" href="{% url 'products:product' product.pk %}">
+                <img src="{{ product.image|default_image }}" alt="prod">
                 <div class="txt">
                     <div class="b_c"><img src="{% static '/img/arrow.png' %}" alt="arrow"></div>
                     <h3>{{product.category.name}}</h3>
@@ -87,7 +89,7 @@
         </div>
         <div class="pic">
             {% for product in products %}
-                <a href="#"><img src="/media/{{product.image|default:'products_image/no_image.png'}}" alt=""></a>
+                <a href="{% url 'products:product' product.pk %}"><img src="{{ product.image|default_image }}" alt=""></a>
             <!-- <a href="#"><img src="{% static '/img/product_truck.jpg' %}" alt=""></a>
             <a href="product_detail.html"><img src="{% static '/img/product_heli.jpg' %}" alt=""></a>
             <a href="#"><img src="{% static '/img/product_owl.jpg' %}" alt=""></a>
