@@ -30,6 +30,7 @@ def main(request):
         'categories': categories,
         'products': products[1:5],
         'basket': basket,
+        'hot_product': hot_product,
         'same_products': same_products,
     }
     return render(request, 'mainapp/index.html', context)

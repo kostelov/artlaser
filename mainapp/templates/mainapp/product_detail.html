@@ -22,7 +22,9 @@
 
         <div class="product_header">
             <h2>Похожие товары</h2>
-            <a class="explore" href="#">показать все<img src="{% static '/img/arrow.png' %}" alt=""></a>
+            <a class="explore" href="{% url 'products:category' hot_product.category.pk %}">показать все
+                <img src="{% static '/img/arrow.png' %}" alt="">
+            </a>
         </div>
         <div class="pic">
             {% for product in same_products %}

@@ -48,10 +48,10 @@ def category_create(request):
 def category_update(request, pk):
     title = 'Редактирование категории'
 
-    object = get_object_or_404(ProductCategory, pk=int(pk))
-    form = ProductCategoryEditForm(instance=object)
+    category = get_object_or_404(ProductCategory, pk=int(pk))
+    form = ProductCategoryEditForm(instance=category)
     if request.method == 'POST':
-        form = ProductCategoryEditForm(request.POST, instance=object)
+        form = ProductCategoryEditForm(request.POST, instance=category)
         # Получаем данные и проверяем есть ли они в request
         if form.is_valid():
             try:
@@ -72,19 +72,19 @@ def category_update(request, pk):
 
 @user_passes_test(lambda user: user.is_superuser)
 def category_del(request, pk):
-    object = get_object_or_404(ProductCategory, pk=int(pk))
-    if object:
-        object.is_active = False
-        object.save()
+    category = get_object_or_404(ProductCategory, pk=int(pk))
+    if category:
+        category.is_active = False
+        category.save()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 @user_passes_test(lambda user: user.is_superuser)
 def category_activate(request, pk):
-    object = get_object_or_404(ProductCategory, pk=int(pk))
-    if object:
-        object.is_active = True
-        object.save()
+    category = get_object_or_404(ProductCategory, pk=int(pk))
+    if category:
+        category.is_active = True
+        category.save()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
@@ -202,7 +202,6 @@ def product_create(request, category_pk):
     return render(request, 'adminapp/product_edit.html', context)
 
 
-
 @user_passes_test(lambda user: user.is_superuser)
 def product_update(request, product_pk):
     title = 'Изменить товар'
@@ -227,17 +226,17 @@ def product_update(request, product_pk):
 
 @user_passes_test(lambda user: user.is_superuser)
 def product_del(request, pk):
-    object = get_object_or_404(Product, pk=int(pk))
-    if object:
-        object.is_active = False
-        object.save()
+    product = get_object_or_404(Product, pk=int(pk))
+    if product:
+        product.is_active = False
+        product.save()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 @user_passes_test(lambda user: user.is_superuser)
 def product_activate(request, pk):
-    object = get_object_or_404(Product, pk=int(pk))
-    if object:
-        object.is_active = True
-        object.save()
+    product = get_object_or_404(Product, pk=int(pk))
+    if product:
+        product.is_active = True
+        product.save()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))

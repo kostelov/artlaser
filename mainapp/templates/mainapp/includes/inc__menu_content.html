@@ -1,10 +1,24 @@
 <ul class="menu_products">
     {% for category in categories %}
         <li>
+            {% if hot_product %}
             <a href="{% url 'products:category' category.pk %}"
             class="{% if hot_product.category.pk == category.pk %} active {% endif %}">
                 {{ category.name.upper }}
             </a>
+            {% elif products%}
+                {% if request.resolver_match.args.0 == '0' %}
+                     <a href="{% url 'products:category' category.pk %}"
+                    class="{% if request.resolver_match.args.0|add:0 == category.pk %} active {% endif %}">
+                        {{ category.name.upper }}
+                    </a>
+                {% else %}
+                    <a href="{% url 'products:category' category.pk %}"
+                    class="{% if products.0.category.pk == category.pk %} active {% endif %}">
+                        {{ category.name.upper }}
+                    </a>
+                {% endif %}
+            {% endif %}
         </li>
     {% endfor %}
 </ul>

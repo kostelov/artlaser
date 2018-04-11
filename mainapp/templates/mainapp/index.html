@@ -26,7 +26,7 @@
                 <li><a class="click" href="#">Популярные</a></li>
                 <li><a href="#">Новинки</a></li>
             </ul>
-            <a class="explore" href="#">показать все<img src="{% static '/img/arrow.png' %}" alt=""></a>
+            <a class="explore" href="{% url 'products:index' %}">показать все<img src="{% static '/img/arrow.png' %}" alt=""></a>
         </div>
         <div class="preview">
             {% for product in products %}
