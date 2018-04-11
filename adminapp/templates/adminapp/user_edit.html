@@ -1,5 +1,6 @@
 {% extends 'authapp/base.html' %}
 {% load staticfiles %}
+{% load tags %}
 
 {% block title %}
     {{ block.super }} - {{ title }}
@@ -11,13 +12,11 @@
             <h2 class="text-center">{{ title }}</h2>
             {% csrf_token %}
             {{ form.as_p}}
-            <div class="user_avatar"><img src="/media/{{ object.avatar|default:'users_avatars/gravatar.png' }}"></div>
+            <div class="user_avatar"><img src="{{ object.avatar|default_avatar }}"></div>
             <br>
             <input class="form-control btn btn-primary btn-block" type="submit" value="Cохранить">
         </form>
-        <!--<button class="btn btn-round form-control last">-->
         <br>
            <p class="text-center"><a href="{% url 'administrator:users' %}" class="">назад</a></p>
-        <!--</button>-->
     </div>
 {% endblock %}

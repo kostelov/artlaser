@@ -1,5 +1,6 @@
 {% extends 'adminapp/base.html' %}
 {% load staticfiles %}
+{% load tags %}
 
 {% block title %}
 {{ block.super }} - {{ title }}
@@ -47,7 +48,7 @@
                     <p>тел.: <span>{{ object.phone }}</span></p>
                 </td>
                 <td class="td-image">
-                    <img class="img_min" src="/media/{{ object.avatar|default:'users_avatars/gravatar.png' }}" alt="">
+                    <img class="img_min" src="{{ object.avatar|default_avatar }}" alt="">
                 </td>
                 <td class="td-total">
                     {% if object.is_active %}

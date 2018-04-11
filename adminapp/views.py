@@ -140,6 +140,7 @@ def user_update(request, pk):
         context = {
             'title': title,
             'form': form,
+            'object': user,
         }
         return render(request, 'adminapp/user_edit.html', context)
 

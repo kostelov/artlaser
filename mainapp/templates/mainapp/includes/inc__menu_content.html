@@ -1,18 +1,21 @@
 <ul class="menu_products">
     {% for category in categories %}
         <li>
+            <!-- подсветка категории при выборе горячего предложения -->
             {% if hot_product %}
             <a href="{% url 'products:category' category.pk %}"
             class="{% if hot_product.category.pk == category.pk %} active {% endif %}">
                 {{ category.name.upper }}
             </a>
             {% elif products%}
+            <!-- подсветка категории при выборе категории все -->
                 {% if request.resolver_match.args.0 == '0' %}
-                     <a href="{% url 'products:category' category.pk %}"
+                    <a href="{% url 'products:category' category.pk %}"
                     class="{% if request.resolver_match.args.0|add:0 == category.pk %} active {% endif %}">
                         {{ category.name.upper }}
                     </a>
                 {% else %}
+            <!-- подсветка категории при выборе товара -->
                     <a href="{% url 'products:category' category.pk %}"
                     class="{% if products.0.category.pk == category.pk %} active {% endif %}">
                         {{ category.name.upper }}

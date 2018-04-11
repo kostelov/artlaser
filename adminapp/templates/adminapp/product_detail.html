@@ -1,5 +1,6 @@
 {% extends 'adminapp/base.html' %}
 {% load staticfiles %}
+{% load tags %}
 
 {% block title %}
 {{ block.super }} - {{ title }}
@@ -19,8 +20,8 @@
     <div class="content">
         <div class="product">
             <div>
-                <div class="prod_pic"><a href="/media/{{ object.image }}" target="_blank">
-                    <img src="/media/{{ object.image }}" alt=""></a>
+                <div class="prod_pic"><a href="{{ object.image|default_image }}" target="_blank">
+                    <img src="{{ object.image|default_image }}" alt=""></a>
                 </div>
             </div>
             <div class="prod_text">
