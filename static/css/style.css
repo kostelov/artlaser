@@ -393,12 +393,14 @@ nav a:hover {
 }
 
 .product_header {
+    display: flex;
+    justify-content: space-between;
     padding: 120px 98px 60px;
 }
 
 .product_header h2 {
-    display: block;
-    float: left;
+/*    display: block;
+    float: left;*/
     color: #212121;
     font-size: 36px;
     font-weight: 700;

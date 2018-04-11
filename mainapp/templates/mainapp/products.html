@@ -19,11 +19,26 @@
         {% include 'mainapp/includes/inc__menu_content.html' %}
         {% if products %}
             <div class="product_header">
-                {% if request.resolver_match.args.0 == '0' %}
+                <div>
+                    {% if request.resolver_match.args.0 == '0' %}
                     <h2>Каталог</h2>
-                {% else %}
+                    {% else %}
                     <h2>{{ products.0.category.name }}</h2>
-                {% endif %}
+                    {% endif %}
+                </div>
+                <div>
+                    {% if products.has_previous %}
+                    <a href="{% url 'products:page' category_pk products.previous_page_number %}">
+                        <button class="btn-cat"><<</button>
+                    </a>
+                    {% endif %}
+                    <button class="btn-cat">{{ products.number }}</button> - <button class="btn-cat">{{ products.paginator.num_pages }}</button>
+                    {% if products.has_next %}
+                        <a href="{% url 'products:page' category_pk products.next_page_number %}">
+                            <button class="btn-cat">>></button>
+                        </a>
+                    {% endif %}
+                </div>
                 <!--<a class="explore" href="#">показать все<img src="{% static '/img/arrow.png' %}" alt=""></a>-->
             </div>
             <div class="pic prod">
