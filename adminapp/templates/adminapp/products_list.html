@@ -33,7 +33,9 @@
             <tbody>
             {% for object in objects %}
             <tr style="{% if not object.is_active%}opacity:0.3{% endif %}">
-                <th scope="row">{{ object.name }}</th>
+                <th scope="row">
+                    <a href="{% url 'administrator:product_read' object.pk %}">{{ object.name }}</a>
+                </th>
                 <td>{{ object.short_descript }}</td>
                 <td class="td-image">
                     <img class="img_min" src="/media/{{ object.image|default:'products_image/no_image.png' }}" alt="">

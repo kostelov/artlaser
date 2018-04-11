@@ -616,6 +616,15 @@ tfoot tr:last-child {
     position: absolute;
 }
 
+.h3 {
+    font-size: 48px;
+    font-weight: 100;
+    color: #212121;
+    margin-top: 285px;
+    padding-left: 100px;
+    position: absolute;
+}
+
 .maps {
     padding: 70px 98px;
     display: flex;

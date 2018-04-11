@@ -1,0 +1,47 @@
+{% extends 'adminapp/base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+{{ block.super }} - {{ title }}
+{% endblock %}
+
+{% block container %}
+<!--<div class="container clr">-->
+<div class="container clearfix">
+    <div class="hero-back">
+        <!-- ====== MENU ====== -->
+        {% include 'adminapp/includes/inc__menu.html' %}
+        <!-- ====== MENU END ====== -->
+        <div class="h3">{{ object.name }}</div>
+    </div>
+
+    <!-- ====== CONTENT ====== -->
+    <div class="content">
+        <div class="product">
+            <div>
+                <div class="prod_pic"><a href="/media/{{ object.image }}" target="_blank">
+                    <img src="/media/{{ object.image }}" alt=""></a>
+                </div>
+            </div>
+            <div class="prod_text">
+                <h3>{{ object.name }}</h3>
+                <p align="center">Артикул: <h4>{{ object.vendor_id }}</h4></p>
+                <p class="price">{{ object.price }}<span>&#8372;</span></p>
+                <div class="text">
+                    <p><u>Категория:</u> <br> {{ object.category.name }} </p>
+                    <br>
+                    <p><u>Краткое описание:</u> <br> {{ object.short_descript }}</p>
+                    <br>
+                    <p><u>Описание:</u> <br> {{ object.description }}</p>
+                    <br>
+                </div>
+                <hr>
+                <a href="{% url 'administrator:products' object.category.pk %}">
+                    <button class="btn-cat"><< Назад</button>
+                </a>
+            </div>
+        </div>
+    </div>    <!-- ====== CONTENT END ====== -->
+</div>
+<!--</div>  ====== CONTAINER END ====== -->
+{% endblock %}

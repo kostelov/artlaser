@@ -182,6 +182,17 @@ def products(request, category_pk):
 
 
 @user_passes_test(lambda user: user.is_superuser)
+def product_read(request, product_pk):
+    product = get_object_or_404(Product, pk=int(product_pk))
+    title = 'Подробнее'
+    context = {
+        'title': title,
+        'object': product,
+    }
+    return render(request, 'adminapp/product_detail.html', context)
+
+
+@user_passes_test(lambda user: user.is_superuser)
 def product_create(request, category_pk):
     title = 'Добавить товар'
     category = get_object_or_404(ProductCategory, pk=int(category_pk))
@@ -225,8 +236,8 @@ def product_update(request, product_pk):
 
 
 @user_passes_test(lambda user: user.is_superuser)
-def product_del(request, pk):
-    product = get_object_or_404(Product, pk=int(pk))
+def product_del(request, product_pk):
+    product = get_object_or_404(Product, pk=int(product_pk))
     if product:
         product.is_active = False
         product.save()
@@ -234,8 +245,8 @@ def product_del(request, pk):
 
 
 @user_passes_test(lambda user: user.is_superuser)
-def product_activate(request, pk):
-    product = get_object_or_404(Product, pk=int(pk))
+def product_activate(request, product_pk):
+    product = get_object_or_404(Product, pk=int(product_pk))
     if product:
         product.is_active = True
         product.save()
