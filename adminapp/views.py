@@ -1,6 +1,10 @@
 from django.shortcuts import render, HttpResponseRedirect, get_object_or_404
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.contrib.auth.decorators import user_passes_test
+from django.views.generic.list import ListView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic.detail import DetailView
+from django.utils.decorators import method_decorator
 
 from adminapp.forms import ShopUserAdminEditForm, ProductCategoryEditForm, ProductEditForm
 from authapp.models import ShopUser
@@ -22,52 +26,80 @@ def categories(request):
     return render(request, 'adminapp/categories.html', context)
 
 
-@user_passes_test(lambda user: user.is_superuser)
-def category_create(request):
-    title = 'Новая категория'
-    form = ProductCategoryEditForm()
-    if request.method == 'POST':
-        form = ProductCategoryEditForm(request.POST)
-        # Получаем данные и проверяем есть ли они в request
-        if form.is_valid():
-            try:
-                form.save()
-                # После сохранения данных возвращаемся к списку пользователей
-                return HttpResponseRedirect(reverse('administrator:categories'))
-            except ValueError:
-                pass
+# @user_passes_test(lambda user: user.is_superuser)
+# def category_create(request):
+#     title = 'Новая категория'
+#     form = ProductCategoryEditForm()
+#     if request.method == 'POST':
+#         form = ProductCategoryEditForm(request.POST)
+#         # Получаем данные и проверяем есть ли они в request
+#         if form.is_valid():
+#             try:
+#                 form.save()
+#                 # После сохранения данных возвращаемся к списку пользователей
+#                 return HttpResponseRedirect(reverse('administrator:categories'))
+#             except ValueError:
+#                 pass
+#
+#     context = {
+#         'title': title,
+#         'form': form,
+#     }
+#     return render(request, 'adminapp/category_edit.html', context)
 
-    context = {
-        'title': title,
-        'form': form,
-    }
-    return render(request, 'adminapp/category_edit.html', context)
+
+class ProductCategoryCreateView(CreateView):
+    model = ProductCategory
+    template_name = 'adminapp/category_edit.html'
+    success_url = reverse_lazy('administrator:categories')
+    # fields = ('__all__')
+    form_class = ProductCategoryEditForm
+
+    @method_decorator(user_passes_test(lambda user: user.is_superuser))
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
 
 
-@user_passes_test(lambda user: user.is_superuser)
-def category_update(request, pk):
-    title = 'Редактирование категории'
+# @user_passes_test(lambda user: user.is_superuser)
+# def category_update(request, pk):
+#     title = 'Редактирование категории'
+#
+#     category = get_object_or_404(ProductCategory, pk=int(pk))
+#     form = ProductCategoryEditForm(instance=category)
+#     if request.method == 'POST':
+#         form = ProductCategoryEditForm(request.POST, instance=category)
+#         # Получаем данные и проверяем есть ли они в request
+#         if form.is_valid():
+#             try:
+#                 form.save()
+#                 # После сохранения данных возвращаемся к списку пользователей
+#                 return HttpResponseRedirect(reverse('administrator:categories'))
+#             except ValueError:
+#                 pass
+#         else:
+#             form = ProductCategoryEditForm(instance=object)
+#
+#     context = {
+#         'title': title,
+#         'form': form,
+#     }
+#     return render(request, 'adminapp/category_edit.html', context)
 
-    category = get_object_or_404(ProductCategory, pk=int(pk))
-    form = ProductCategoryEditForm(instance=category)
-    if request.method == 'POST':
-        form = ProductCategoryEditForm(request.POST, instance=category)
-        # Получаем данные и проверяем есть ли они в request
-        if form.is_valid():
-            try:
-                form.save()
-                # После сохранения данных возвращаемся к списку пользователей
-                return HttpResponseRedirect(reverse('administrator:categories'))
-            except ValueError:
-                pass
-        else:
-            form = ProductCategoryEditForm(instance=object)
 
-    context = {
-        'title': title,
-        'form': form,
-    }
-    return render(request, 'adminapp/category_edit.html', context)
+class ProductCategoryUpdateView(UpdateView):
+    model = ProductCategory
+    template_name = 'adminapp/category_edit.html'
+    success_url = reverse_lazy('administrator:categories')
+    form_class = ProductCategoryEditForm
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Редактирование категории'
+        return context
+
+    @method_decorator(user_passes_test(lambda user: user.is_superuser))
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
 
 
 @user_passes_test(lambda user: user.is_superuser)
@@ -79,6 +111,18 @@ def category_del(request, pk):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
+# class ProductCategoryDeleteView(DeleteView):
+#     model = ProductCategory
+#     template_name = # нужен отдельно шаблон
+#     success_url = reverse_lazy('administrator:categories')
+#
+#     def delete(self, request, *args, **kwargs):
+#         self.object = self.get_object()
+#         self.object.is_active = False
+#         self.object.save()
+#         return HttpResponseRedirect(self.success_url())
+
+
 @user_passes_test(lambda user: user.is_superuser)
 def category_activate(request, pk):
     category = get_object_or_404(ProductCategory, pk=int(pk))
@@ -88,17 +132,31 @@ def category_activate(request, pk):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
-@user_passes_test(lambda user: user.is_superuser)
-def users(request):
-    title = 'Пользователи'
-    users_list = ShopUser.objects.all().order_by('-is_active', 'username')
+# @user_passes_test(lambda user: user.is_superuser)
+# def users(request):
+#     title = 'Пользователи'
+#     users_list = ShopUser.objects.all().order_by('-is_active', 'username')
+#
+#     context = {
+#         'title': title,
+#         'objects': users_list,
+#     }
+#
+#     return render(request, 'adminapp/users.html', context)
 
-    context = {
-        'title': title,
-        'objects': users_list,
-    }
 
-    return render(request, 'adminapp/users.html', context)
+class UserListView(ListView):
+    model = ShopUser
+    template_name = 'adminapp/users.html'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Пользователи'
+        return context
+
+    @method_decorator(user_passes_test(lambda user: user.is_superuser))
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
 
 
 @user_passes_test(lambda user: user.is_superuser)
@@ -182,15 +240,24 @@ def products(request, category_pk):
     return render(request, 'adminapp/products_list.html', context)
 
 
-@user_passes_test(lambda user: user.is_superuser)
-def product_read(request, product_pk):
-    product = get_object_or_404(Product, pk=int(product_pk))
-    title = 'Подробнее'
-    context = {
-        'title': title,
-        'object': product,
-    }
-    return render(request, 'adminapp/product_detail.html', context)
+# @user_passes_test(lambda user: user.is_superuser)
+# def product_read(request, product_pk):
+#     product = get_object_or_404(Product, pk=int(product_pk))
+#     title = 'Подробнее'
+#     context = {
+#         'title': title,
+#         'object': product,
+#     }
+#     return render(request, 'adminapp/product_detail.html', context)
+
+
+class ProductDetailView(DetailView):
+    model = Product
+    template_name = 'adminapp/product_detail.html'
+
+    @method_decorator(user_passes_test(lambda user: user.is_superuser))
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
 
 
 @user_passes_test(lambda user: user.is_superuser)
